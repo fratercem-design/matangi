@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Mātaṅgī Codex</title>
+    <link rel="stylesheet" href="styles.css?v=2" />
+  </head>
+  <body>
+    <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+    <header class="hero" id="top">
+      <img src="assets/matangi-hero.png" alt="" class="hero__image" />
+      <div class="hero__veil"></div>
+      <nav class="topbar" aria-label="Primary navigation">
+        <a href="#top" class="brand">Mātaṅgī Codex</a>
+        <div class="topbar__actions">
+          <a href="#study-map">Study Map</a>
+          <a href="#practices">Practices</a>
+          <button id="themeToggle" type="button" aria-label="Change color mode">◐</button>
+        </div>
+      </nav>
+      <section class="hero__content">
+        <p class="eyebrow">A devotional and symbolic study guide</p>
+        <h1>The Mātaṅgī Codex</h1>
+        <p class="hero__subtitle">
+          Śrī Rāja Śyāmalā, sacred speech, symbolic consciousness, media,
+          mantra, music, shadow, and tantric expression.
+        </p>
+        <div class="hero__actions">
+          <a class="button button--primary" href="#study-map">Begin Study</a>
+          <a class="button button--secondary" href="#quick-cards">Open Cards</a>
+        </div>
+      </section>
+    </header>
+
+    <main>
+      <section class="notice" aria-label="Disclaimer">
+        <div>
+          <p class="eyebrow">Respectful Frame</p>
+          <h2>For personal devotional and educational use</h2>
+        </div>
+        <p>
+          This guide is for study, symbolic interpretation, comparative esoteric
+          analysis, devotional contemplation, and personal reflection. It is not
+          medical advice, psychological treatment, guaranteed occult instruction,
+          initiation into tantric lineages, or a replacement for qualified
+          teachers and traditions.
+        </p>
+      </section>
+
+      <section class="tools" aria-label="Study tools">
+        <label class="search">
+          <span>Search the codex</span>
+          <input id="searchInput" type="search" placeholder="Try speech, veena, media, shadow..." />
+        </label>
+        <div class="tool-buttons" role="group" aria-label="Reading density">
+          <button class="density is-active" data-density="full" type="button">Full</button>
+          <button class="density" data-density="focus" type="button">Focus</button>
+          <button class="density" data-density="cards" type="button">Cards</button>
+        </div>
+      </section>
+
+      <section class="overview" id="study-map">
+        <div class="section-heading">
+          <p class="eyebrow">Study Map</p>
+          <h2>Follow the current from sound to symbol</h2>
+        </div>
+        <div class="map-grid" id="mapGrid"></div>
+      </section>
+
+      <section class="codex-layout">
+        <aside class="toc" aria-label="Chapter list">
+          <p class="toc__title">Chapters</p>
+          <div id="tocList"></div>
+        </aside>
+
+        <article class="chapters" id="chapters"></article>
+      </section>
+
+      <section class="quick-cards" id="quick-cards">
+        <div class="section-heading">
+          <p class="eyebrow">Quick Cards</p>
+          <h2>Key ideas at a glance</h2>
+        </div>
+        <div class="card-grid" id="quickCards"></div>
+      </section>
+
+      <section class="practices" id="practices">
+        <div class="section-heading">
+          <p class="eyebrow">Practice Lab</p>
+          <h2>Contemplation prompts</h2>
+        </div>
+        <div class="practice-grid" id="practiceGrid"></div>
+      </section>
+
+      <section class="closing">
+        <p class="eyebrow">Closing Reflection</p>
+        <h2>May speech become conscious.</h2>
+        <p>
+          May expression become truthful. May symbols become illuminating rather
+          than imprisoning. May creativity become transformative. May sound
+          become awareness. May consciousness express itself beautifully.
+        </p>
+        <p class="mantra">Om Aim Klīm Sauḥ</p>
+      </section>
+    </main>
+
+    <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">↑</button>
+    <script src="script.js?v=2"></script>
+  </body>
+</html>
