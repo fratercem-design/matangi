@@ -1,144 +1,236 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import AmbientCanvas from "@/components/AmbientCanvas";
+import PageHero from "@/components/PageHero";
 import ScrollReveal from "@/components/ScrollReveal";
-import { portraits } from "@/lib/gallery";
+import SacredGeometry from "@/components/SacredGeometry";
+import { galleryItems, galleryCategories } from "@/lib/gallery";
+import { X, ZoomIn } from "lucide-react";
 
-function PortraitSVG({ p }: { p: typeof portraits[0] }) {
-  const [c1,c2,c3,c4]=p.palette;
-  const auras: Record<string,string[]> = { violet:["#7c3aed","#4c1d95"], emerald:["#00cc44","#064e3b"], crimson:["#991b1b","#450a0a"], teal:["#0d9488","#042f2e"], green:["#00cc44","#052e16"], indigo:["#4338ca","#1e1b4b"] };
-  const [ac1]=auras[p.aura]??["#7c3aed","#1a0030"];
+// ── Generative artwork placeholder ───────────────────────────
+function ArtworkPlaceholder({ item }: { item: typeof galleryItems[0] }) {
+  const [c0, c1, c2, c3] = item.palette;
+  const variants: Record<string, "yantra" | "lotus" | "sri" | "minimal"> = {
+    "Divine Portraits": "lotus",
+    "Sacred Symbols":   "yantra",
+    "Temple Art":       "minimal",
+    "Visionary Art":    "sri",
+    "Cosmic Landscapes": "yantra",
+  };
+  const geomVariant = variants[item.category] ?? "minimal";
+
   return (
-    <svg viewBox="0 0 300 380" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-      <defs>
-        <radialGradient id={`a-${p.id}`} cx="50%" cy="40%" r="60%"><stop offset="0%" stopColor={ac1} stopOpacity="0.25"/><stop offset="100%" stopColor="#05010a" stopOpacity="0"/></radialGradient>
-        <filter id={`g-${p.id}`}><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-        <filter id={`g2-${p.id}`}><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-      </defs>
-      <ellipse cx="150" cy="160" rx="130" ry="170" fill={`url(#a-${p.id})`}/>
-      <circle cx="150" cy="100" r="70" fill="none" stroke={c3} strokeWidth="0.6" opacity="0.35" filter={`url(#g-${p.id})`}/>
-      <circle cx="150" cy="100" r="80" fill="none" stroke={c4} strokeWidth="0.4" strokeDasharray="3,9" opacity="0.25"/>
-      <ellipse cx="150" cy="270" rx="65" ry="100" fill={c1} opacity="0.2"/>
-      <path d="M120 175 Q125 215 120 250 Q140 260 150 260 Q160 260 180 250 Q175 215 180 175 Q162 170 150 170 Q138 170 120 175Z" fill={c1} opacity="0.7" filter={`url(#g-${p.id})`}/>
-      <path d="M120 180 Q92 200 80 235 Q90 255 100 245 Q110 225 120 215Z" fill={c1} opacity="0.6"/>
-      <path d="M180 180 Q208 200 220 235 Q210 255 200 245 Q190 225 180 215Z" fill={c1} opacity="0.6"/>
-      <rect x="143" y="145" width="14" height="25" rx="4" fill={c1} opacity="0.7"/>
-      <ellipse cx="150" cy="105" rx="38" ry="44" fill={c1} opacity="0.85" filter={`url(#g-${p.id})`}/>
-      <ellipse cx="150" cy="90" rx="6" ry="3.5" fill={c4} filter={`url(#g2-${p.id})`} opacity="0.9"/>
-      <ellipse cx="150" cy="90" rx="2.5" ry="1.5" fill="#ffffff" opacity="0.8"/>
-      <ellipse cx="138" cy="102" rx="7" ry="5" fill="#0a0020"/>
-      <ellipse cx="162" cy="102" rx="7" ry="5" fill="#0a0020"/>
-      <circle cx="138" cy="102" r="3" fill={c3} opacity="0.8"/>
-      <circle cx="162" cy="102" r="3" fill={c3} opacity="0.8"/>
-      <circle cx="139" cy="101" r="1" fill="white" opacity="0.9"/>
-      <circle cx="163" cy="101" r="1" fill="white" opacity="0.9"/>
-      <path d="M143 118 Q150 124 157 118" fill={c4} opacity="0.8"/>
-      <path d="M112 82 L118 58 L130 74 L140 44 L150 66 L160 44 L170 74 L182 58 L188 82Z" fill={c4} opacity="0.75" filter={`url(#g2-${p.id})`}/>
-      <path d="M125 160 Q150 172 175 160" fill="none" stroke={c4} strokeWidth="1.5" opacity="0.6"/>
-      <circle cx="150" cy="171" r="3" fill={c4} opacity="0.7"/>
-      <text x="58" y="145" fontFamily="serif" fontSize="13" fill={c3} opacity="0.3">ॐ</text>
-      <text x="226" y="170" fontFamily="serif" fontSize="11" fill={c4} opacity="0.3">ह्रीं</text>
-      {Array.from({length:12}).map((_,i)=>{ const a=(i*30*Math.PI)/180,x1=150+Math.cos(a)*85,y1=105+Math.sin(a)*85,x2=150+Math.cos(a)*112,y2=105+Math.sin(a)*112; return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke={i%2===0?c3:c4} strokeWidth="0.4" opacity="0.15"/>; })}
-    </svg>
+    <div className="w-full h-full relative overflow-hidden" style={{
+      background: `radial-gradient(ellipse at 40% 35%, ${c0}55 0%, ${c1}20 40%, transparent 70%),
+                   linear-gradient(160deg, ${c1}18, ${c3}10, #0a0a0f)`,
+    }}>
+      {/* Background glow */}
+      <div className="absolute inset-0 opacity-30"
+        style={{ background: `radial-gradient(ellipse at 60% 60%, ${c2}40 0%, transparent 60%)` }} />
+
+      {/* Sacred geometry */}
+      <div className="absolute inset-0 flex items-center justify-center opacity-40">
+        <SacredGeometry size={160} variant={geomVariant} color={c0} animated={false} />
+      </div>
+
+      {/* Floating particles */}
+      {[...Array(6)].map((_, i) => (
+        <motion.div key={i}
+          className="absolute w-1 h-1 rounded-full"
+          style={{
+            left: `${20 + i * 13}%`, top: `${30 + (i % 3) * 20}%`,
+            background: i % 2 === 0 ? c0 : c2, opacity: 0.5,
+          }}
+          animate={{ y: [-4, 4, -4], opacity: [0.3, 0.7, 0.3] }}
+          transition={{ duration: 3 + i * 0.5, repeat: Infinity, ease: "easeInOut" }}
+        />
+      ))}
+
+      {/* Category glyph */}
+      <div className="absolute top-4 left-4">
+        <span className="text-2xl opacity-30" style={{ color: c0 }}>
+          {item.category === "Divine Portraits" ? "◉" :
+           item.category === "Sacred Symbols"   ? "◈" :
+           item.category === "Temple Art"        ? "⬡" :
+           item.category === "Visionary Art"     ? "✦" : "⊕"}
+        </span>
+      </div>
+
+      {/* Subtle title watermark */}
+      <div className="absolute bottom-4 right-4 text-right opacity-20">
+        <p className="font-mono text-[9px] tracking-widest" style={{ color: c0 }}>
+          {item.category.toUpperCase()}
+        </p>
+      </div>
+    </div>
   );
 }
 
-export default function Gallery() {
-  const [selected,setSelected]=useState<string|null>(null);
-  const active=portraits.find(p=>p.id===selected);
-
+// ── Gallery grid item ─────────────────────────────────────────
+function GalleryItem({ item, onClick }: { item: typeof galleryItems[0]; onClick: () => void }) {
   return (
-    <main className="relative min-h-screen pt-20 pb-24 page-enter">
-      <AmbientCanvas intensity={0.6}/>
-      <div className="absolute inset-0 pointer-events-none" style={{background:"radial-gradient(ellipse at 50% 0%,rgba(30,0,50,0.5) 0%,transparent 60%)"}}/>
-      <div className="relative z-10 temple-container">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.6 }}
+      className="group cursor-pointer"
+      onClick={onClick}
+    >
+      <div className="relative border border-white/[0.07] hover:border-gold/20 rounded-sm overflow-hidden
+                      transition-all duration-500 shadow-[0_4px_24px_rgba(0,0,0,0.4)]
+                      hover:shadow-[0_8px_40px_rgba(0,0,0,0.6),0_0_20px_rgba(184,150,46,0.05)]">
+        <div className="aspect-[4/5] relative">
+          <ArtworkPlaceholder item={item} />
+          {/* Hover overlay */}
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-500 flex items-center justify-center">
+            <ZoomIn size={28} className="text-ivory/0 group-hover:text-ivory/80 transition-all duration-400 scale-75 group-hover:scale-100" />
+          </div>
+          {/* Featured badge */}
+          {item.featured && (
+            <div className="absolute top-3 left-3">
+              <span className="text-label px-2 py-1 bg-gold/10 border border-gold/30 text-gold/80 rounded-sm">
+                Featured
+              </span>
+            </div>
+          )}
+        </div>
+        <div className="p-4 bg-[rgba(10,10,15,0.8)]">
+          <div className="text-label text-ivory/30 mb-1">{item.category}</div>
+          <h3 className="font-display text-base text-ivory/90">{item.title}</h3>
+          <p className="text-ivory/40 text-xs mt-0.5 font-display italic">{item.subtitle}</p>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
 
-        <ScrollReveal className="pt-12 pb-16 text-center">
-          <div className="section-label mb-4">Visions · Sacred Portraits</div>
-          <h1 className="section-title-ritual text-5xl md:text-6xl text-white mb-4">
-            Gallery of <span className="text-violet-300 italic" style={{textShadow:"0 0 30px rgba(124,58,237,0.5)"}}>Manifestations</span>
-          </h1>
-          <p className="font-ritual text-lg text-white/40 max-w-xl mx-auto italic">Six faces of the same transmission. Each portrait a different octave.</p>
-          <div className="ritual-divider mt-8"><span className="font-mono text-xs text-white/20">◉</span></div>
-        </ScrollReveal>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-          {portraits.map((p,i)=>(
-            <motion.div key={p.id} initial={{opacity:0,y:30}} whileInView={{opacity:1,y:0}} viewport={{once:true,margin:"-40px"}} transition={{duration:0.7,delay:i*0.08}}
-              className="group cursor-pointer" onClick={()=>setSelected(selected===p.id?null:p.id)}>
-              <div className={`relative border transition-all duration-500 overflow-hidden rounded-sm ${selected===p.id?"border-white/30":"border-white/8 hover:border-white/20"}`}
-                style={selected===p.id?{boxShadow:`0 0 30px ${p.palette[0]}30`}:{}}>
-                <div className="aspect-[3/4] bg-black/60 relative overflow-hidden">
-                  <div className="absolute inset-0 opacity-30 group-hover:opacity-50 transition-opacity duration-500"
-                    style={{background:`radial-gradient(ellipse at 50% 30%,${p.palette[0]}25 0%,transparent 70%)`}}/>
-                  <PortraitSVG p={p}/>
-                  <motion.div className="absolute inset-0 pointer-events-none"
-                    animate={{opacity:selected===p.id?[0.15,0.35,0.15]:0}} transition={{duration:3,repeat:Infinity}}
-                    style={{background:`radial-gradient(ellipse at 50% 35%,${p.palette[0]}40 0%,transparent 55%)`}}/>
-                </div>
-                <div className="p-4 bg-black/40 backdrop-blur-sm">
-                  <div className="font-orbitron text-xs tracking-widest mb-0.5" style={{color:p.palette[0]}}>{p.title}</div>
-                  <div className="font-mono text-xs text-white/30">{p.subtitle}</div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+// ── Lightbox ─────────────────────────────────────────────────
+function Lightbox({ item, onClose }: { item: typeof galleryItems[0]; onClose: () => void }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+      className="fixed inset-0 z-50 bg-black/92 backdrop-blur-xl flex items-center justify-center p-4 md:p-8"
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.92, opacity: 0 }} transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        className="max-w-5xl w-full grid md:grid-cols-2 gap-0 rounded-sm overflow-hidden border border-white/10 shadow-[0_0_80px_rgba(0,0,0,0.8)]"
+        onClick={e => e.stopPropagation()}
+      >
+        {/* Artwork */}
+        <div className="relative" style={{ minHeight: 360 }}>
+          <ArtworkPlaceholder item={item} />
         </div>
 
-        <AnimatePresence>
-          {active&&(
-            <motion.div key={active.id} initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} exit={{opacity:0,y:12}} transition={{duration:0.5}}
-              className="mb-16 border border-white/10 bg-black/50 backdrop-blur-sm p-6 md:p-10 rounded-sm">
-              <div className="grid md:grid-cols-3 gap-8">
-                <div className="md:col-span-2 space-y-4">
-                  <div className="font-orbitron text-sm tracking-widest" style={{color:active.palette[0]}}>{active.title}</div>
-                  <p className="font-ritual italic text-white/40">{active.subtitle}</p>
-                  <p className="font-ritual text-base text-white/65 leading-relaxed">{active.description}</p>
-                  <p className="font-mono text-xs text-white/25 italic">{active.form}</p>
-                </div>
-                <div>
-                  <div className="font-mono text-[10px] text-white/25 tracking-widest uppercase mb-3">Symbolism</div>
-                  {active.symbolism.map((s,i)=>(
-                    <div key={i} className="flex gap-3 py-2 border-b border-white/5">
-                      <div className="w-1 h-1 mt-1.5 rounded-full shrink-0" style={{background:active.palette[2]}}/>
-                      <span className="font-space text-xs text-white/55">{s}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {/* Info */}
+        <div className="bg-[#0c0c14] p-6 md:p-8 flex flex-col">
+          <div className="flex items-start justify-between mb-6">
+            <div>
+              <div className="text-label text-ivory/30 mb-2">{item.category}</div>
+              <h2 className="font-display text-2xl text-ivory/90">{item.title}</h2>
+              <p className="font-display text-sm text-ivory/50 italic mt-1">{item.subtitle}</p>
+            </div>
+            <button onClick={onClose} className="p-2 border border-white/10 rounded-sm text-ivory/40 hover:text-ivory/80 transition-colors">
+              <X size={16} />
+            </button>
+          </div>
 
-        {/* Constellation */}
-        <ScrollReveal delay={0.1} className="mb-16">
-          <div className="section-label mb-3">The Mahavidya Constellation</div>
-          <h2 className="section-title-ritual text-3xl text-white mb-8">Ten Faces of the Absolute</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
-            {[
-              {n:"I",  name:"KALI",domain:"Time · Death",active:false},
-              {n:"II", name:"TARA",domain:"Compassion",active:false},
-              {n:"III",name:"TRIPURA SUNDARI",domain:"Beauty · Desire",active:false},
-              {n:"IV", name:"BHUVANESHVARI",domain:"Space · World",active:false},
-              {n:"V",  name:"BHAIRAVI",domain:"Destruction",active:false},
-              {n:"VI", name:"CHHINNAMASTA",domain:"Sacrifice",active:false},
-              {n:"VII",name:"DHUMAVATI",domain:"Void · Smoke",active:false},
-              {n:"VIII",name:"BAGALAMUKHI",domain:"Paralysis",active:false},
-              {n:"IX", name:"MATANGI",domain:"Speech · Forbidden",active:true},
-              {n:"X",  name:"KAMALA",domain:"Abundance",active:false},
-            ].map(g=>(
-              <div key={g.n} className={`p-4 border rounded-sm text-center transition-all duration-300 ${g.active?"border-emerald-500/50 bg-emerald-500/8 shadow-lg shadow-emerald-500/10":"border-white/8 bg-black/20 hover:border-white/15"}`}>
-                <div className={`font-ritual text-xl mb-1 ${g.active?"text-emerald-300":"text-white/25"}`}>{g.n}</div>
-                <div className={`font-orbitron text-[10px] tracking-widest leading-tight mb-1 ${g.active?"text-emerald-300":"text-white/50"}`}>{g.name}</div>
-                <div className="font-mono text-[9px] text-white/25">{g.domain}</div>
-                {g.active&&<div className="mt-2 font-mono text-[9px] text-emerald-400 tracking-widest">◈ ACTIVE</div>}
+          <p className="text-ivory/60 text-sm leading-relaxed mb-6 flex-1">{item.description}</p>
+
+          {/* Palette */}
+          <div className="mb-5">
+            <div className="text-label text-ivory/25 mb-2">Color Palette</div>
+            <div className="flex gap-2">
+              {item.palette.map(c => (
+                <div key={c} className="w-6 h-6 rounded-full border border-white/10"
+                  style={{ background: c }} title={c} />
+              ))}
+            </div>
+          </div>
+
+          {/* Tags */}
+          <div className="flex flex-wrap gap-1.5">
+            {item.tags.map(t => (
+              <span key={t} className="text-label px-2.5 py-1 border border-white/[0.08] text-ivory/30 rounded-sm">
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+export default function GalleryPage() {
+  const [cat, setCat] = useState<string>("All");
+  const [lightbox, setLightbox] = useState<typeof galleryItems[0] | null>(null);
+  const filtered = cat === "All" ? galleryItems : galleryItems.filter(i => i.category === cat);
+  const featured = galleryItems.filter(i => i.featured);
+
+  return (
+    <div className="page-enter">
+      <PageHero
+        label="Divine Art Gallery"
+        title="Visions of"
+        titleAccent="Matangi"
+        subtitle="Generative sacred artwork exploring her many forms, symbols, and cosmic dimensions"
+        variant="violet"
+        geometry={false}
+      />
+
+      <section className="section-padding">
+        <div className="section-container">
+          {/* Featured row */}
+          <ScrollReveal className="mb-16">
+            <div className="text-label text-gold/50 mb-6">Featured Works</div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+              {featured.map(item => (
+                <motion.button key={item.id} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
+                  onClick={() => setLightbox(item)}
+                  className="group relative border border-white/[0.07] hover:border-gold/25 rounded-sm overflow-hidden transition-all duration-400">
+                  <div className="aspect-square">
+                    <ArtworkPlaceholder item={item} />
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2">
+                    <span className="font-display text-xs text-ivory/90 line-clamp-1">{item.title}</span>
+                  </div>
+                </motion.button>
+              ))}
+            </div>
+          </ScrollReveal>
+
+          {/* Category filter */}
+          <ScrollReveal className="flex flex-wrap gap-2 mb-10 justify-center">
+            {galleryCategories.map(c => (
+              <button key={c} onClick={() => setCat(c)}
+                className={`text-label px-4 py-2 border rounded-sm transition-all duration-300 ${
+                  cat === c
+                    ? "border-violet-500/60 text-violet-300 bg-violet-950/20"
+                    : "border-white/10 text-ivory/40 hover:border-white/25 hover:text-ivory/70"
+                }`}>
+                {c}
+              </button>
+            ))}
+          </ScrollReveal>
+
+          {/* Masonry-ish grid */}
+          <div className="columns-2 sm:columns-3 lg:columns-4 gap-4 space-y-4">
+            {filtered.map(item => (
+              <div key={item.id} className="break-inside-avoid mb-4">
+                <GalleryItem item={item} onClick={() => setLightbox(item)} />
               </div>
             ))}
           </div>
-        </ScrollReveal>
+        </div>
+      </section>
 
-      </div>
-    </main>
+      {/* Lightbox */}
+      <AnimatePresence>
+        {lightbox && <Lightbox item={lightbox} onClose={() => setLightbox(null)} />}
+      </AnimatePresence>
+    </div>
   );
 }

@@ -1,21 +1,28 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Nav from "@/components/Nav";
-import { GlyphOverlay } from "@/components/GlyphOverlay";
+import Footer from "@/components/Footer";
+import SanctuaryTracker from "@/components/SanctuaryTracker";
 
 export const metadata: Metadata = {
-  title: "MATANGI — Temple of the Outcaste Oracle",
-  description:
-    "A digital sanctuary for Matangi, ninth Mahavidya — goddess of forbidden speech, dark knowledge, and the sacred outcast.",
+  title: { default: "Temple of Ma Matangi", template: "%s · Temple of Ma Matangi" },
+  description: "A digital temple dedicated to Ma Matangi — Mahavidya of speech, wisdom, music, creativity, and transformative knowledge.",
+  keywords: ["Matangi", "Mahavidya", "Tantric Goddess", "Sacred Speech", "Wisdom", "Devotional"],
+  openGraph: {
+    title: "Temple of Ma Matangi",
+    description: "Enter a living sanctuary of wisdom, speech, music, art, and transcendence.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className="gradient-void min-h-screen">
-        <GlyphOverlay />
+    <html lang="en" className="scroll-smooth">
+      <body className="gradient-temple min-h-screen">
+        <SanctuaryTracker />
         <Nav />
-        <div className="relative z-10">{children}</div>
+        <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );

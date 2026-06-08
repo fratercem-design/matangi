@@ -1,66 +1,124 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
-import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
 
 const links = [
-  { href: "/",        label: "THRESHOLD",  glyph: "◈" },
-  { href: "/temple",  label: "INNER HALL", glyph: "⬡" },
-  { href: "/sanctum", label: "SANCTUM",    glyph: "✦" },
-  { href: "/gallery", label: "VISIONS",    glyph: "◉" },
-  { href: "/archive", label: "ARCHIVE",    glyph: "⟁" },
+  { href: "/about",       label: "About" },
+  { href: "/philosophy",  label: "Philosophy" },
+  { href: "/hymns",       label: "Hymns" },
+  { href: "/kavacham",    label: "Kavacham" },
+  { href: "/mantras",     label: "Mantras" },
+  { href: "/names",       label: "108 Names" },
+  { href: "/gallery",     label: "Gallery" },
+  { href: "/meditations", label: "Meditations" },
+  { href: "/journal",     label: "Journal" },
+  { href: "/library",     label: "Library" },
 ];
 
 export default function Nav() {
   const path = usePathname();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const isHome = path === "/";
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-40 hidden md:flex items-center justify-between
-                      px-8 py-4 border-b border-white/5 bg-black/60 backdrop-blur-md">
-        <Link href="/" className="font-orbitron text-xs tracking-[0.3em] text-fuchsia-400/80 hover:text-fuchsia-300 transition-colors">
-          MATANGI
-        </Link>
-        <div className="flex items-center gap-8">
-          {links.map((l) => (
-            <Link key={l.href} href={l.href}
-              className={`font-mono text-xs tracking-widest transition-all duration-300 relative group
-                ${path === l.href ? "text-emerald-300" : "text-white/40 hover:text-white/80"}`}>
-              <span className="mr-1.5 opacity-50">{l.glyph}</span>
-              {l.label}
-              {path === l.href && (
-                <motion.div layoutId="nav-indicator"
-                  className="absolute -bottom-1 left-0 right-0 h-px bg-emerald-400/60" />
-              )}
-            </Link>
-          ))}
-        </div>
-      </nav>
+      <motion.header
+        initial={{ opacity: 0, y: -8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.3 }}
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
+          scrolled || !isHome
+            ? "bg-[rgba(10,10,15,0.92)] backdrop-blur-xl border-b border-white/[0.05]"
+            : "bg-transparent"
+        }`}
+      >
+        <nav className="section-container flex items-center justify-between h-16">
+          {/* Logo */}
+          <Link href="/" className="font-display text-lg tracking-widest text-ivory/90 hover:text-gold transition-colors duration-300">
+            <span className="text-gold/70">✦</span> Matangi
+          </Link>
 
-      <div className="fixed top-0 left-0 right-0 z-40 flex md:hidden items-center justify-between
-                      px-5 py-4 border-b border-white/5 bg-black/80 backdrop-blur-md">
-        <Link href="/" className="font-orbitron text-xs tracking-widest text-fuchsia-400">MATANGI</Link>
-        <button onClick={() => setOpen(!open)} className="text-white/60 text-xl font-mono">
-          {open ? "✕" : "≡"}
-        </button>
-      </div>
-
-      {open && (
-        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
-          className="fixed top-[53px] inset-x-0 z-40 bg-black/95 border-b border-white/10 md:hidden">
-          {links.map((l) => (
-            <Link key={l.href} href={l.href} onClick={() => setOpen(false)}
-              className={`flex items-center gap-3 px-6 py-4 font-mono text-xs tracking-widest
-                          border-b border-white/5 transition-colors
-                          ${path === l.href ? "text-emerald-300 bg-emerald-500/5" : "text-white/50 hover:text-white/80"}`}>
-              <span className="text-fuchsia-500/60">{l.glyph}</span>
-              {l.label}
+          {/* Desktop links */}
+          <div className="hidden lg:flex items-center gap-7">
+            {links.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                className={`text-label transition-colors duration-300 ${
+                  path === l.href
+                    ? "text-gold"
+                    : "text-ivory/50 hover:text-ivory/90"
+                }`}
+              >
+                {l.label}
+              </Link>
+            ))}
+            <Link href="/sanctuary" className="btn-ritual text-[0.6rem] py-2 px-4">
+              Inner Sanctuary
             </Link>
-          ))}
-        </motion.div>
-      )}
+          </div>
+
+          {/* Mobile toggle */}
+          <button
+            className="lg:hidden text-ivory/60 hover:text-ivory transition-colors p-1"
+            onClick={() => setOpen(!open)}
+            aria-label="Toggle menu"
+          >
+            {open ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </nav>
+      </motion.header>
+
+      {/* Mobile drawer */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            key="drawer"
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed inset-0 z-40 bg-[#0a0a0f]/97 backdrop-blur-xl flex flex-col pt-20 px-8 pb-12"
+          >
+            <div className="flex flex-col gap-6 mt-4">
+              {links.map((l, i) => (
+                <motion.div
+                  key={l.href}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.05 + 0.1 }}
+                >
+                  <Link
+                    href={l.href}
+                    onClick={() => setOpen(false)}
+                    className={`font-display text-2xl transition-colors ${
+                      path === l.href ? "text-gold" : "text-ivory/70 hover:text-ivory"
+                    }`}
+                  >
+                    {l.label}
+                  </Link>
+                </motion.div>
+              ))}
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
+                <Link href="/sanctuary" onClick={() => setOpen(false)} className="btn-ritual mt-4 inline-block">
+                  Inner Sanctuary
+                </Link>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
