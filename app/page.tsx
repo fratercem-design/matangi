@@ -51,14 +51,14 @@ function TypedText({ text, delay = 0, className = "" }: { text: string; delay?: 
 
 // ── Entry portal portal gate ──────────────────────────────────
 const NAV_ITEMS = [
-  { href: "/about",       icon: "✦", label: "ABOUT",       sub: "Who Is Matangi" },
-  { href: "/philosophy",  icon: "◈", label: "PHILOSOPHY",  sub: "Teachings & Wisdom" },
-  { href: "/hymns",       icon: "⬡", label: "HYMNS",       sub: "Sacred Hymns" },
-  { href: "/mantras",     icon: "⟁", label: "MANTRAS",     sub: "Sacred Sounds" },
-  { href: "/gallery",     icon: "◉", label: "GALLERY",     sub: "Divine Art" },
-  { href: "/meditations", icon: "❋", label: "MEDITATIONS", sub: "Guided Practices" },
-  { href: "/journal",     icon: "⊕", label: "JOURNAL",     sub: "Reflection" },
-  { href: "/library",     icon: "◧", label: "LIBRARY",     sub: "Archive" },
+  { href: "/oracle",      icon: "✦", label: "ORACLE",     sub: "Readings & Art" },
+  { href: "/about",       icon: "⬡", label: "ABOUT",      sub: "Teachings & Lore" },
+  { href: "/mantras",     icon: "◈", label: "MANTRAS",    sub: "Sacred Sounds" },
+  { href: "/kavacham",    icon: "⟁", label: "KAVACHAM",   sub: "Armor Hymn" },
+  { href: "/gallery",     icon: "◉", label: "GALLERY",    sub: "Sacred Portraits" },
+  { href: "/meditations", icon: "❋", label: "MEDITATE",   sub: "Guided Practices" },
+  { href: "/journal",     icon: "⊕", label: "JOURNAL",    sub: "Reflection" },
+  { href: "/library",     icon: "◧", label: "ARCHIVE",    sub: "Esoteric Texts" },
 ];
 
 export default function Home() {

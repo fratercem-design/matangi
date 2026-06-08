@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 
 const links = [
+  { href: "/oracle",      label: "✦ Oracle",    special: true },
   { href: "/about",       label: "About" },
   { href: "/philosophy",  label: "Philosophy" },
   { href: "/hymns",       label: "Hymns" },
@@ -50,20 +51,34 @@ export default function Nav() {
           </Link>
 
           {/* Desktop links */}
-          <div className="hidden lg:flex items-center gap-7">
-            {links.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                className={`text-label transition-colors duration-300 ${
-                  path === l.href
-                    ? "text-gold"
-                    : "text-ivory/50 hover:text-ivory/90"
-                }`}
-              >
-                {l.label}
-              </Link>
-            ))}
+          <div className="hidden lg:flex items-center gap-6">
+            {links.map((l) =>
+              l.special ? (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  className={`text-label px-3 py-1.5 rounded-sm border transition-all duration-300 ${
+                    path === l.href
+                      ? "border-gold/70 text-gold bg-gold/10 shadow-[0_0_16px_rgba(184,150,46,0.3)]"
+                      : "border-gold/30 text-gold/70 hover:border-gold/60 hover:text-gold hover:shadow-[0_0_12px_rgba(184,150,46,0.2)]"
+                  }`}
+                >
+                  {l.label}
+                </Link>
+              ) : (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  className={`text-label transition-colors duration-300 ${
+                    path === l.href
+                      ? "text-gold"
+                      : "text-ivory/50 hover:text-ivory/90"
+                  }`}
+                >
+                  {l.label}
+                </Link>
+              )
+            )}
             <Link href="/sanctuary" className="btn-ritual text-[0.6rem] py-2 px-4">
               Inner Sanctuary
             </Link>
@@ -103,7 +118,13 @@ export default function Nav() {
                     href={l.href}
                     onClick={() => setOpen(false)}
                     className={`font-display text-2xl transition-colors ${
-                      path === l.href ? "text-gold" : "text-ivory/70 hover:text-ivory"
+                      l.special
+                        ? path === l.href
+                          ? "text-gold"
+                          : "text-gold/70 hover:text-gold"
+                        : path === l.href
+                        ? "text-gold"
+                        : "text-ivory/70 hover:text-ivory"
                     }`}
                   >
                     {l.label}
