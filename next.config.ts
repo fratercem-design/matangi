@@ -1,8 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: "export",
-  trailingSlash: true,
+  // Removed "output: export" — Railway runs Next.js as a Node server
+  // For GitHub Pages static export, re-add: output: "export"
   images: { unoptimized: true },
 };
 
