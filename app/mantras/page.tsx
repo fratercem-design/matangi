@@ -4,7 +4,259 @@ import { motion, AnimatePresence } from "framer-motion";
 import PageHero from "@/components/PageHero";
 import ScrollReveal from "@/components/ScrollReveal";
 import { mantras, breathingGuide, mantraLevels } from "@/lib/mantras";
+import { mantraJapaRitual, sodasaNamas, sodasaNamaIntro, sukaShyamalaMantra } from "@/lib/sodasa-nama";
 import { Play, Square, RotateCcw, ChevronDown, ChevronUp } from "lucide-react";
+
+// ── Five Mantra Versions ──────────────────────────────────────
+function FiveVersionsSection() {
+  const [open, setOpen] = useState(false);
+  const versions = sukaShyamalaMantra.mantraversionsFive;
+  return (
+    <div className="mt-16 max-w-4xl mx-auto">
+      <ScrollReveal>
+        <button onClick={() => setOpen(!open)}
+          className="w-full flex items-center justify-between p-5 card-parchment rounded-sm hover:border-gold/20 transition-all">
+          <div>
+            <div className="text-label text-gold/50 mb-1">Supplementary</div>
+            <h3 className="font-display text-xl text-ivory/85">Five Canonical Mantra Versions</h3>
+          </div>
+          <motion.div animate={{ rotate: open ? 180 : 0 }}><ChevronDown size={16} className="text-ivory/30" /></motion.div>
+        </button>
+        <AnimatePresence>
+          {open && (
+            <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.4 }}>
+              <div className="card-parchment rounded-b-sm px-5 pb-6 pt-4 border-t-0 space-y-4">
+                <p className="font-display text-sm text-ivory/40 italic mb-4">
+                  Different traditions and tantras have transmitted variations of the Mātaṅgī mantra.
+                  Each carries a slightly different emphasis and is suited to different types of practice.
+                </p>
+                {versions.map(v => (
+                  <div key={v.version} className="border border-white/[0.06] bg-black/20 rounded-sm p-4">
+                    <div className="flex items-start gap-3">
+                      <span className="font-display text-lg text-gold/40 w-6 shrink-0">V{v.version}</span>
+                      <div>
+                        <div className="text-label text-ivory/30 mb-2">{v.label}</div>
+                        <p className="font-devanagari text-lg text-emerald-200/75 leading-loose"
+                          style={{ fontFamily: "Noto Serif Devanagari, serif" }}>{v.devanagari}</p>
+                        <p className="font-mono text-xs text-violet-300/45 italic mt-1">{v.iast}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </ScrollReveal>
+    </div>
+  );
+}
+
+// ── Mantra Japa Ritual Section ────────────────────────────────
+function MantraJapaSection() {
+  const [open, setOpen] = useState(false);
+  const ritual = mantraJapaRitual;
+  return (
+    <div className="mt-8 max-w-4xl mx-auto">
+      <ScrollReveal>
+        <button onClick={() => setOpen(!open)}
+          className="w-full flex items-center justify-between p-5 card-parchment rounded-sm hover:border-gold/20 transition-all">
+          <div>
+            <div className="text-label text-emerald-500/60 mb-1">Complete Practice</div>
+            <h3 className="font-display text-xl text-ivory/85">{ritual.title} — Ritual Procedure</h3>
+          </div>
+          <motion.div animate={{ rotate: open ? 180 : 0 }}><ChevronDown size={16} className="text-ivory/30" /></motion.div>
+        </button>
+        <AnimatePresence>
+          {open && (
+            <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.4 }}>
+              <div className="card-parchment border-t-0 rounded-b-sm px-5 pb-8 pt-5 space-y-8">
+
+                {/* Dhyana */}
+                <div>
+                  <div className="text-label text-gold/40 mb-3">Dhyānam — Meditation Verse</div>
+                  <div className="grid md:grid-cols-2 gap-5">
+                    <div>
+                      <p className="font-devanagari text-lg text-emerald-200/75 leading-loose whitespace-pre-line"
+                        style={{ fontFamily: "Noto Serif Devanagari, serif" }}>
+                        {ritual.dhyanam.devanagariText}
+                      </p>
+                      <p className="font-mono text-xs text-violet-300/40 italic mt-2 whitespace-pre-line">{ritual.dhyanam.iast}</p>
+                    </div>
+                    <div>
+                      <div className="text-label text-ivory/25 mb-2">Translation</div>
+                      <p className="font-display text-sm text-ivory/60 italic leading-relaxed">{ritual.dhyanam.translation}</p>
+                      <p className="text-label text-ivory/20 mt-2">Source: {ritual.dhyanam.source}</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Pancapuja */}
+                <div>
+                  <div className="text-label text-gold/40 mb-3">Pañcapūjā — Five Element Offerings</div>
+                  <p className="text-ivory/45 text-sm mb-4">{ritual.pancapuja.description}</p>
+                  <div className="grid sm:grid-cols-2 gap-2">
+                    {ritual.pancapuja.offerings.map(o => (
+                      <div key={o.bija} className="flex gap-3 p-3 border border-white/[0.06] bg-black/20 rounded-sm">
+                        <div className="text-center shrink-0 w-10">
+                          <div className="font-devanagari text-xl text-gold/70"
+                            style={{ fontFamily: "Noto Serif Devanagari, serif" }}>{o.devanagari}</div>
+                          <div className="text-[10px] font-mono text-ivory/25">{o.bija}</div>
+                        </div>
+                        <div>
+                          <div className="text-label text-ivory/30 mb-0.5">{o.element}</div>
+                          <p className="text-ivory/50 text-xs leading-relaxed">{o.meaning}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Main Mantra */}
+                <div>
+                  <div className="text-label text-gold/40 mb-3">Main Mantra — {ritual.mainMantra.repetitions}× repetitions</div>
+                  <div className="glass-emerald rounded-sm p-5 text-center space-y-2">
+                    <p className="font-devanagari text-2xl text-emerald-200 leading-loose"
+                      style={{ fontFamily: "Noto Serif Devanagari, serif" }}>{ritual.mainMantra.devanagariText}</p>
+                    <p className="font-mono text-xs text-violet-300/55 italic">{ritual.mainMantra.iast}</p>
+                    <p className="font-display text-sm text-ivory/50 italic mt-2">{ritual.mainMantra.meaning}</p>
+                  </div>
+                </div>
+
+                {/* Samarpana */}
+                <div>
+                  <div className="text-label text-gold/40 mb-3">Samarpaṇam — Dedication</div>
+                  <div className="border-l-2 border-gold/20 pl-4">
+                    <p className="font-devanagari text-base text-emerald-200/70 leading-loose whitespace-pre-line"
+                      style={{ fontFamily: "Noto Serif Devanagari, serif" }}>{ritual.samarpana.devanagariText}</p>
+                    <p className="font-mono text-xs text-violet-300/40 italic mt-1 whitespace-pre-line">{ritual.samarpana.iast}</p>
+                    <p className="font-display text-sm text-ivory/55 italic mt-3 leading-relaxed">{ritual.samarpana.translation}</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </ScrollReveal>
+    </div>
+  );
+}
+
+// ── Sodasa Nama Section ───────────────────────────────────────
+function SodasaNamaSection() {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="mt-8 max-w-4xl mx-auto">
+      <ScrollReveal>
+        <button onClick={() => setOpen(!open)}
+          className="w-full flex items-center justify-between p-5 card-parchment rounded-sm hover:border-gold/20 transition-all">
+          <div>
+            <div className="text-label text-violet-400/60 mb-1">Śrī Śyāmalā</div>
+            <h3 className="font-display text-xl text-ivory/85">Ṣoḍaśanāma — The 16 Sacred Names</h3>
+          </div>
+          <motion.div animate={{ rotate: open ? 180 : 0 }}><ChevronDown size={16} className="text-ivory/30" /></motion.div>
+        </button>
+        <AnimatePresence>
+          {open && (
+            <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.4 }}>
+              <div className="card-parchment border-t-0 rounded-b-sm px-5 pb-8 pt-5 space-y-5">
+                <p className="font-display text-sm text-ivory/50 italic leading-relaxed max-w-2xl">
+                  {sodasaNamaIntro.split("\n\n")[0]}
+                </p>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  {sodasaNamas.map(n => (
+                    <div key={n.number} className="border border-white/[0.06] bg-black/20 rounded-sm p-4">
+                      <div className="flex items-start gap-3">
+                        <span className="font-display text-sm text-gold/40 w-5 shrink-0">{n.number}</span>
+                        <div>
+                          <p className="font-devanagari text-base text-emerald-200/75 leading-loose"
+                            style={{ fontFamily: "Noto Serif Devanagari, serif" }}>{n.devanagari}</p>
+                          <p className="font-mono text-[11px] text-violet-300/40 italic mt-0.5">{n.iast}</p>
+                          {n.translation && (
+                            <p className="font-display text-xs text-ivory/45 italic mt-1 leading-relaxed">{n.translation}</p>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </ScrollReveal>
+    </div>
+  );
+}
+
+// ── Suka Shyamala Section ─────────────────────────────────────
+function SukaShyamalaSection() {
+  const [open, setOpen] = useState(false);
+  const s = sukaShyamalaMantra;
+  return (
+    <div className="mt-8 max-w-4xl mx-auto">
+      <ScrollReveal>
+        <button onClick={() => setOpen(!open)}
+          className="w-full flex items-center justify-between p-5 card-parchment rounded-sm hover:border-gold/20 transition-all">
+          <div>
+            <div className="text-label text-gold/50 mb-1">Mātaṅgī Tantram</div>
+            <h3 className="font-display text-xl text-ivory/85">{s.title} ({s.letterCount})</h3>
+          </div>
+          <motion.div animate={{ rotate: open ? 180 : 0 }}><ChevronDown size={16} className="text-ivory/30" /></motion.div>
+        </button>
+        <AnimatePresence>
+          {open && (
+            <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.4 }}>
+              <div className="card-parchment border-t-0 rounded-b-sm px-5 pb-8 pt-5 space-y-6">
+                <p className="font-display text-sm text-ivory/50 italic leading-relaxed">{s.introduction}</p>
+                <p className="font-display text-xs text-ivory/35 italic">{s.purpose}</p>
+
+                {/* Dhyana */}
+                <div>
+                  <div className="text-label text-gold/40 mb-3">Dhyānam</div>
+                  <p className="font-devanagari text-base text-emerald-200/70 leading-loose whitespace-pre-line"
+                    style={{ fontFamily: "Noto Serif Devanagari, serif" }}>{s.dhyanam.devanagari}</p>
+                  <p className="font-display text-sm text-ivory/50 italic mt-3 leading-relaxed">{s.dhyanam.translation}</p>
+                </div>
+
+                {/* The mantra */}
+                <div>
+                  <div className="text-label text-gold/40 mb-3">The Mantra — {s.repetitions}× repetitions</div>
+                  <div className="glass-emerald rounded-sm p-5 text-center space-y-2">
+                    <p className="font-devanagari text-xl text-emerald-200 leading-loose"
+                      style={{ fontFamily: "Noto Serif Devanagari, serif" }}>{s.devanagariText}</p>
+                    <p className="font-mono text-xs text-violet-300/50 italic">{s.iast}</p>
+                  </div>
+                </div>
+
+                {/* Component meanings */}
+                <div>
+                  <div className="text-label text-gold/40 mb-3">Component Meanings</div>
+                  <div className="space-y-2">
+                    {s.componentMeanings.map(c => (
+                      <div key={c.component} className="flex gap-3 p-3 border border-white/[0.05] bg-black/20 rounded-sm text-sm">
+                        <div className="font-devanagari text-base text-gold/60 w-40 shrink-0"
+                          style={{ fontFamily: "Noto Serif Devanagari, serif" }}>{c.component}</div>
+                        <div>
+                          <span className="text-label text-ivory/30 mr-2">{c.name}</span>
+                          <span className="text-ivory/50">{c.meaning}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </ScrollReveal>
+    </div>
+  );
+}
 
 // ── Breathing visualizer ──────────────────────────────────────
 function BreathingCircle({ phase }: { phase: typeof breathingGuide[0] | null }) {
@@ -308,6 +560,19 @@ export default function MantrasPage() {
           <div className="space-y-5 max-w-4xl mx-auto">
             {filtered.map((m, i) => <MantraCard key={m.id} mantra={m} index={i} />)}
           </div>
+
+          {/* ── Five Mantra Versions ─────────────────── */}
+          <FiveVersionsSection />
+
+          {/* ── Mantra Japa Ritual ───────────────────── */}
+          <MantraJapaSection />
+
+          {/* ── Sodasa Nama ──────────────────────────── */}
+          <SodasaNamaSection />
+
+          {/* ── Suka Shyamala ────────────────────────── */}
+          <SukaShyamalaSection />
+
         </div>
       </section>
     </div>

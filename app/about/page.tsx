@@ -6,6 +6,10 @@ import RitualCard from "@/components/RitualCard";
 import {
   matangiCore, matangiAttributes, matangiForms, matangiSiddhis, originStory,
 } from "@/lib/matangi-content";
+import {
+  dasaMahavidyaIntro, shivaShaktiTeaching, tantraTeaching,
+  matangiVaikhari, tenGoddesses, purushaRthas, dasaMahavidyaOrigin,
+} from "@/lib/dasa-mahavidya";
 import Link from "next/link";
 
 export const metadata: Metadata = { title: "About" };
@@ -197,6 +201,86 @@ export default function AboutPage() {
               </ScrollReveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── Dasa Mahavidya Philosophy ─────────────────────── */}
+      <section className="section-padding border-t border-white/[0.04]">
+        <div className="section-container">
+          <ScrollReveal className="text-center mb-14">
+            <p className="text-label text-gold/50 mb-4">Tantric Context</p>
+            <h2 className="font-display text-3xl text-ivory/90 font-light">Daśa Mahāvidyā — The Ten Disciplines</h2>
+            <p className="font-display text-base text-ivory/40 italic mt-4 max-w-2xl mx-auto">
+              {dasaMahavidyaIntro}
+            </p>
+          </ScrollReveal>
+
+          {/* Śiva-Śaktī teaching */}
+          <div className="grid md:grid-cols-2 gap-6 mb-10">
+            {[shivaShaktiTeaching, tantraTeaching].map((t, i) => (
+              <ScrollReveal key={t.title} delay={i * 0.1}>
+                <div className="card-parchment rounded-sm p-6 hover:border-gold/20 transition-all duration-400 h-full">
+                  <h3 className="font-display text-xl text-gold/80 mb-4">{t.title}</h3>
+                  {t.body.split("\n\n").map((p, j) => (
+                    <p key={j} className="font-display text-sm text-ivory/60 italic leading-relaxed mb-3">{p}</p>
+                  ))}
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+
+          {/* Vaikhari teaching */}
+          <ScrollReveal className="mb-10">
+            <div className="glass-emerald rounded-sm p-6 md:p-8">
+              <h3 className="font-display text-2xl text-emerald-300 mb-5">{matangiVaikhari.title}</h3>
+              {matangiVaikhari.body.split("\n\n").map((p, i) => (
+                <p key={i} className="font-display text-sm text-ivory/65 italic leading-relaxed mb-3">{p}</p>
+              ))}
+            </div>
+          </ScrollReveal>
+
+          {/* Four stages of sound */}
+          <ScrollReveal className="mb-10">
+            <div className="text-label text-ivory/25 mb-4 text-center">THE FOUR STAGES OF SOUND</div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {[
+                { stage: "Parā",      num: "I",   desc: "Transcendent vibration beyond perception — the absolute before any manifestation", color: "border-violet-500/30 text-violet-300" },
+                { stage: "Paśyantī", num: "II",  desc: "The seeing stage — where intention forms and the impulse to speak arises", color: "border-blue-500/30 text-blue-300" },
+                { stage: "Madhyamā", num: "III", desc: "The middle stage — inner speech, thought forming before articulation", color: "border-emerald-600/30 text-emerald-300" },
+                { stage: "Vaikharī", num: "IV",  desc: "The delivered speech — Mātaṅgī's domain — sound fully materialized in time and space", color: "border-gold/30 text-gold" },
+              ].map(s => (
+                <div key={s.stage} className={`p-4 border ${s.color.split(" ")[0]} bg-black/30 rounded-sm text-center`}>
+                  <div className="font-display text-2xl mb-1 text-white/20">{s.num}</div>
+                  <div className={`font-display text-lg mb-2 ${s.color.split(" ")[1]}`}>{s.stage}</div>
+                  <p className="text-ivory/40 text-xs leading-relaxed">{s.desc}</p>
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
+
+          {/* Purusharthas */}
+          <ScrollReveal className="mb-10">
+            <div className="text-label text-ivory/25 mb-6 text-center">THE FOUR PURUṢĀRTHAS</div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {purushaRthas.map((p, i) => (
+                <RitualCard key={p.name} title={p.name} subtitle={p.Sanskrit}
+                  variant={["emerald","gold","violet","parchment"][i] as any} delay={i * 0.08}>
+                  <p className="text-ivory/55 text-sm mb-2">{p.meaning}</p>
+                  <p className="text-ivory/40 text-xs italic leading-relaxed">{p.note}</p>
+                </RitualCard>
+              ))}
+            </div>
+          </ScrollReveal>
+
+          {/* Origin of ten goddesses */}
+          <ScrollReveal>
+            <div className="glass rounded-sm p-6 md:p-8">
+              <div className="text-label text-gold/40 mb-3">Origin of the Daśa Mahāvidyās</div>
+              {dasaMahavidyaOrigin.split("\n\n").map((p, i) => (
+                <p key={i} className="font-display text-sm text-ivory/55 italic leading-relaxed mb-3">{p}</p>
+              ))}
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 

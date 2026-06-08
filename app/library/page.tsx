@@ -3,7 +3,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import PageHero from "@/components/PageHero";
 import ScrollReveal from "@/components/ScrollReveal";
-import { libraryEntries, librarySections } from "@/lib/library";
+import { allLibraryEntries as libraryEntries, librarySections } from "@/lib/library";
 import { Search, BookOpen, X, ChevronDown, ChevronUp } from "lucide-react";
 
 const SECTION_ICONS: Record<string, string> = {

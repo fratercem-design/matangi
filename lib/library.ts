@@ -255,3 +255,30 @@ The parrot on her shoulder is therefore not a pet or a decorative element. It is
 ];
 
 export const librarySections = ["All", "Texts", "Commentary", "Poetry", "Philosophy", "Symbolism"] as const;
+
+
+// ── Additional canonical entries ───────────────────────────
+const _extra: LibraryEntry[] = [{
+  id: "trailokya-mangala-kavacham",
+  title: "Śrī Mātaṅgī Trailokya Maṅgala Kavacam",
+  section: "Texts",
+  tradition: "Nandyāvarta Tantram, Uttarakhaṇḍa",
+  period: "Classical Tantric period",
+  tags: ["kavacham", "armor", "trailokya", "siddhi", "mantra", "nyasa", "protection", "vak-siddhi"],
+  summary: "The full Armor Hymn of Mātaṅgī — 25 verses assigning her divine aspects as protective armor over every region of the body and every direction of space, culminating in the eleven-and-a-half-lettered root mantra. From the Nandyāvarta Tantram.",
+  excerpt: `The Trailokya Maṅgala Kavacam is among the most complete armoring structures in the Mātaṅgī canon. It works on three simultaneous levels.
+
+First, the physical body: each organ and region from crown to feet is assigned a specific goddess-aspect as protector. The brahma-randhra — the crown aperture of the Sahasrāra — is protected by Mātaṅgī herself. The tongue by the Mātṛkā Devīs, the goddesses of the Sanskrit alphabet. The throat by Mahāmāyā.
+
+Second, the ten directions: the cardinal, diagonal, upward, and downward directions of space are each assigned a protective aspect, making the practitioner the center of a complete divine mandala.
+
+Third, the vibrational structure: the kavacham culminates in the revelation of its root mantra — oṃ hrīṃ klīṃ hūṃ mātaṅginyai phaṭ svāhā — the eleven-and-a-half-lettered armor that synthesizes all preceding protection into a single sound-form.
+
+The Phalaśruti (benefits section) is unusually explicit: regular recitation leads to Vāk Siddhi — the perfection of speech, where what is spoken manifests in reality. This is Mātaṅgī's primary gift, and this kavacham is considered essential to any serious practice of her mantras.`,
+  length: "Long",
+  featured: true,
+}];
+
+
+export const kavachamLibraryEntry: LibraryEntry = _extra[0];
+export const allLibraryEntries: LibraryEntry[] = [...libraryEntries, kavachamLibraryEntry];
