@@ -1,5 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
+import { useId } from "react";
 
 export type MatangiForm = "ucchishta" | "raja" | "sumukhi" | "vasya" | "karna" | "default";
 
@@ -421,8 +422,8 @@ function Karna({ id, a: animated }: { id:string; a:boolean }) {
       ))}
       <Body id={id} ac={ac} animated={animated}/>
       {/* Override: CLOSED EYES */}
-      <ellipse cx="275" cy="198" rx="14" ry="10" fill="url(#skin-kp)"/>
-      <ellipse cx="325" cy="198" rx="14" ry="10" fill="url(#skin-kp)"/>
+      <ellipse cx="275" cy="198" rx="14" ry="10" fill={`url(#skin-${id})`}/>
+      <ellipse cx="325" cy="198" rx="14" ry="10" fill={`url(#skin-${id})`}/>
       <path d="M262 198 Q275 208 288 198" fill="none" stroke="#0c2818" strokeWidth="2"/>
       <path d="M312 198 Q325 208 338 198" fill="none" stroke="#0c2818" strokeWidth="2"/>
       <Crown id={id} ac={ac} animated={animated} style="crescent"/>
@@ -537,7 +538,9 @@ function Default({ id, a: animated }: { id:string; a:boolean }) {
 
 // ── Main export ───────────────────────────────────────────────
 export default function MatangiPortrait({ form="default", size=500, animated=true, className="" }: Props) {
-  const uid = `${form.slice(0,2)}p`;
+  const reactId = useId();
+  // sanitize the id — remove colons (React useId can produce :r0:)
+  const uid = `mp${reactId.replace(/[^a-zA-Z0-9]/g, "")}${form.slice(0,2)}`;
   const map: Record<MatangiForm, React.ReactNode> = {
     ucchishta: <Ucchishta id={uid} a={animated}/>,
     raja:      <Raja      id={uid} a={animated}/>,

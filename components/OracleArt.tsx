@@ -1,5 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
+import { useId } from "react";
 import type { OracleArtwork } from "@/lib/oracle";
 
 interface Props {
@@ -587,8 +588,10 @@ function ForestArt({ id, p, animated }: { id: string; p: [string,string,string,s
 
 // ── Main component ────────────────────────────────────────────
 export default function OracleArt({ artwork, size = 400, animated = true, className = "" }: Props) {
+  const reactId = useId();
   const { variant, palette: p, motif } = artwork;
-  const uid = `${variant}-${motif}`;
+  // Clean ID — no colons, no special chars from React's useId
+  const uid = `oa${reactId.replace(/[^a-zA-Z0-9]/g, "")}${variant.slice(0,3)}`;
 
   const artMap: Record<typeof variant, React.ReactNode> = {
     veena:      <VeenaArt     id={uid} p={p} animated={animated} />,
