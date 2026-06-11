@@ -179,7 +179,11 @@ export default function JournalPage() {
   const [showEntries, setShowEntries] = useState(false);
   const [randomPrompt, setRandomPrompt] = useState<typeof journalPrompts[0] | null>(null);
 
-  useEffect(() => { setEntries(loadEntries()); }, []);
+  useEffect(() => {
+    // Deferred load keeps hydration markup stable and avoids sync setState in effect
+    const t = setTimeout(() => setEntries(loadEntries()), 0);
+    return () => clearTimeout(t);
+  }, []);
 
   const handleSave = (content: string) => {
     if (!writing) return;

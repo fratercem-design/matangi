@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import PageHero from "@/components/PageHero";
 import ScrollReveal from "@/components/ScrollReveal";
 import { meditations } from "@/lib/meditations";
-import { Play, Square, ChevronRight, ChevronLeft, RotateCcw } from "lucide-react";
+import { Play, Square, ChevronRight, ChevronLeft } from "lucide-react";
 
 const LEVEL_COLORS = {
   Opening:      "text-emerald-400  border-emerald-600/40",
@@ -34,9 +34,16 @@ function useTimer(duration: number, active: boolean, onComplete: () => void) {
   const [started, setStarted] = useState(false);
   const ref = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  useEffect(() => {
+  // Reset when the stage duration changes — render-phase compare (React
+  // "storing information from previous renders" pattern, no effect cascade)
+  const [prevDuration, setPrevDuration] = useState(duration);
+  if (prevDuration !== duration) {
+    setPrevDuration(duration);
     setRemaining(duration);
     setStarted(false);
+  }
+
+  useEffect(() => {
     if (ref.current) clearInterval(ref.current);
   }, [duration]);
 

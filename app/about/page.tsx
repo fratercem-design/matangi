@@ -1,20 +1,19 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import ScrollReveal from "@/components/ScrollReveal";
-import SacredGeometry from "@/components/SacredGeometry";
 import RitualCard from "@/components/RitualCard";
 import {
   matangiCore, matangiAttributes, matangiForms, matangiSiddhis, originStory,
 } from "@/lib/matangi-content";
 import {
   dasaMahavidyaIntro, shivaShaktiTeaching, tantraTeaching,
-  matangiVaikhari, tenGoddesses, purushaRthas, dasaMahavidyaOrigin,
+  matangiVaikhari, purushaRthas, dasaMahavidyaOrigin,
 } from "@/lib/dasa-mahavidya";
 import Link from "next/link";
 
 export const metadata: Metadata = { title: "About" };
 
-const MAHAVIDYAS = [
+const MAHAVIDYAS: { n: string; name: string; domain: string; active?: boolean }[] = [
   { n: "I",    name: "Kali",              domain: "Time · Liberation" },
   { n: "II",   name: "Tara",              domain: "Compassion · Navigation" },
   { n: "III",  name: "Tripura Sundari",   domain: "Beauty · Desire" },
@@ -189,14 +188,14 @@ export default function AboutPage() {
             {MAHAVIDYAS.map((m, i) => (
               <ScrollReveal key={m.n} delay={i * 0.04}>
                 <div className={`p-4 rounded-sm text-center border transition-all duration-300 ${
-                  (m as any).active
+                  m.active
                     ? "border-emerald-600/50 bg-emerald-950/30 shadow-emerald-glow"
                     : "border-white/[0.06] bg-white/[0.02]"
                 }`}>
-                  <div className={`font-display text-2xl mb-1 ${(m as any).active ? "text-emerald-300" : "text-ivory/25"}`}>{m.n}</div>
-                  <div className={`font-mono text-[10px] tracking-wider leading-tight mb-1 ${(m as any).active ? "text-emerald-300" : "text-ivory/50"}`}>{m.name}</div>
+                  <div className={`font-display text-2xl mb-1 ${m.active ? "text-emerald-300" : "text-ivory/25"}`}>{m.n}</div>
+                  <div className={`font-mono text-[10px] tracking-wider leading-tight mb-1 ${m.active ? "text-emerald-300" : "text-ivory/50"}`}>{m.name}</div>
                   <div className="text-ivory/25 text-[9px] font-mono leading-tight">{m.domain}</div>
-                  {(m as any).active && <div className="mt-1.5 text-[9px] font-mono text-emerald-500 tracking-widest">◈ YOU ARE HERE</div>}
+                  {m.active && <div className="mt-1.5 text-[9px] font-mono text-emerald-500 tracking-widest">◈ YOU ARE HERE</div>}
                 </div>
               </ScrollReveal>
             ))}
@@ -264,7 +263,7 @@ export default function AboutPage() {
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {purushaRthas.map((p, i) => (
                 <RitualCard key={p.name} title={p.name} subtitle={p.Sanskrit}
-                  variant={["emerald","gold","violet","parchment"][i] as any} delay={i * 0.08}>
+                  variant={(["emerald","gold","violet","parchment"] as const)[i]} delay={i * 0.08}>
                   <p className="text-ivory/55 text-sm mb-2">{p.meaning}</p>
                   <p className="text-ivory/40 text-xs italic leading-relaxed">{p.note}</p>
                 </RitualCard>

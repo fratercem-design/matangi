@@ -47,9 +47,10 @@ const VISUALS = [
 ];
 
 // ── Cursor-reactive glyphs ────────────────────────────────────
+const SYMS = ["ॐ","ह्रीं","ऐं","◈","✦","⬡","⟁","◉","श्रीं","◇","⊕"];
+
 function CursorGlyphs() {
   const [glyphs, setGlyphs] = useState<{id:number;x:number;y:number;g:string}[]>([]);
-  const SYMS = ["ॐ","ह्रीं","ऐं","◈","✦","⬡","⟁","◉","श्रीं","◇","⊕"];
   useEffect(() => {
     let counter = 0;
     const handler = (e: MouseEvent) => {
@@ -94,31 +95,30 @@ function RevealFragment({ text, delay }: { text: string; delay: number }) {
         className="font-display text-lg md:text-xl text-ivory/70 italic text-center cursor-default leading-relaxed py-2"
         whileHover={{ color: "#f5f0e8", textShadow: "0 0 20px rgba(184,150,46,0.4)" }}
       >
-        "{text}"
+        &ldquo;{text}&rdquo;
       </motion.p>
     </motion.div>
   );
 }
 
 export default function SanctuaryPage() {
-  const [unlocked, setUnlocked] = useState<boolean | null>(null);
   const [phase, setPhase] = useState<"lock" | "unlocking" | "open">("lock");
   const [visIdx, setVisIdx] = useState(0);
 
   useEffect(() => {
-    try {
-      const visited: string[] = JSON.parse(localStorage.getItem("matangi_visited") ?? "[]");
-      const eligible = visited.length >= 3;
-      setUnlocked(eligible);
-      if (eligible) setPhase("open");
-    } catch {
-      setUnlocked(false);
-    }
+    // Deferred so the unlock check never sets state synchronously inside the effect
+    const t = setTimeout(() => {
+      try {
+        const visited: string[] = JSON.parse(localStorage.getItem("matangi_visited") ?? "[]");
+        if (visited.length >= 3) setPhase("open");
+      } catch { /* stays locked */ }
+    }, 0);
+    return () => clearTimeout(t);
   }, []);
 
   const forceUnlock = () => {
     setPhase("unlocking");
-    setTimeout(() => { setUnlocked(true); setPhase("open"); }, 2500);
+    setTimeout(() => setPhase("open"), 2500);
   };
 
   // Cycle visual
@@ -212,7 +212,7 @@ export default function SanctuaryPage() {
                   <span className="text-shimmer italic">Archive</span>
                 </h1>
                 <p className="font-display text-lg text-ivory/45 italic max-w-xl mx-auto leading-relaxed mb-10">
-                  Here the temple speaks without ceremony. These are the transmissions that don't fit in categories —
+                  Here the temple speaks without ceremony. These are the transmissions that don&apos;t fit in categories —
                   the fragments that arrive when the explaining stops.
                 </p>
 

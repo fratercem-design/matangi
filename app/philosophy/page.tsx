@@ -5,7 +5,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import ScrollReveal from "@/components/ScrollReveal";
 import { philosophyEntries, philosophyCategories } from "@/lib/philosophy";
-import { BookOpen, Clock, ChevronDown } from "lucide-react";
+import { Clock, ChevronDown } from "lucide-react";
 
 function PhilosophyEntry({ entry, index }: { entry: typeof philosophyEntries[0]; index: number }) {
   const [expanded, setExpanded] = useState(false);
@@ -107,7 +107,7 @@ export default function PhilosophyPage() {
           {/* Opening quote */}
           <ScrollReveal className="max-w-3xl mx-auto mb-16">
             <div className="quote-block rounded-sm">
-              The tradition does not say Matangi's wisdom is superior to other forms. It says it governs a specific
+              The tradition does not say Matangi&apos;s wisdom is superior to other forms. It says it governs a specific
               register — the knowledge that does not arrive through the front door. The philosophy explored here
               is devotional, contemplative, and educational. It is an invitation to reflect, not a doctrine to adopt.
             </div>
