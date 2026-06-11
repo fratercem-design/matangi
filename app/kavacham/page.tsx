@@ -6,7 +6,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import RitualCard from "@/components/RitualCard";
 import SacredGeometry from "@/components/SacredGeometry";
 import { kavacham } from "@/lib/hymns";
-import { ChevronDown, ChevronUp, Info } from "lucide-react";
+import { ChevronDown, Info } from "lucide-react";
 
 // ── Type badge ────────────────────────────────────────────────
 const TYPE_STYLES: Record<string, string> = {
@@ -51,7 +51,7 @@ function VerseCard({ verse, index }: { verse: typeof kavacham.verses[0]; index: 
             </div>
             {/* Sanskrit preview */}
             <p className="font-devanagari text-lg text-emerald-200/75 leading-loose line-clamp-1 whitespace-nowrap overflow-hidden text-ellipsis"
-              style={{ fontFamily: "Noto Serif Devanagari, serif" }}>
+              style={{ fontFamily: "var(--font-devanagari)" }}>
               {verse.devanagari.split("\n")[0]}
             </p>
             <p className="font-mono text-xs text-violet-300/40 mt-1 italic line-clamp-1">
@@ -81,7 +81,7 @@ function VerseCard({ verse, index }: { verse: typeof kavacham.verses[0]; index: 
                 <div>
                   <div className="text-label text-emerald-500/50 mb-2">Devanāgarī</div>
                   <p className="font-devanagari text-xl text-emerald-200/80 leading-loose whitespace-pre-line"
-                    style={{ fontFamily: "Noto Serif Devanagari, serif" }}>
+                    style={{ fontFamily: "var(--font-devanagari)" }}>
                     {verse.devanagari}
                   </p>
                 </div>
@@ -131,7 +131,7 @@ function NyasaDisplay() {
           </div>
           <div className="flex-1 space-y-1">
             <p className="font-devanagari text-base text-emerald-200/75"
-              style={{ fontFamily: "Noto Serif Devanagari, serif" }}>
+              style={{ fontFamily: "var(--font-devanagari)" }}>
               {step.devanagari}
             </p>
             <p className="font-mono text-xs text-violet-300/40 italic">{step.iast}</p>
@@ -151,7 +151,7 @@ function RootMantraDisplay() {
       <div className="text-center">
         <div className="text-label text-gold/50 mb-3">{m.letters}</div>
         <p className="font-devanagari text-3xl md:text-4xl text-emerald-200 leading-loose tracking-wide"
-          style={{ fontFamily: "Noto Serif Devanagari, serif" }}>
+          style={{ fontFamily: "var(--font-devanagari)" }}>
           {m.devanagari}
         </p>
         <p className="font-mono text-sm text-violet-300/60 mt-3 italic">{m.iast}</p>
@@ -164,7 +164,7 @@ function RootMantraDisplay() {
           {m.components.map((c) => (
             <div key={c.bija} className="flex gap-3 p-3 border border-white/[0.06] bg-black/20 rounded-sm">
               <div className="font-devanagari text-lg text-gold/70 w-20 shrink-0 leading-loose"
-                style={{ fontFamily: "Noto Serif Devanagari, serif" }}>
+                style={{ fontFamily: "var(--font-devanagari)" }}>
                 {c.bija}
               </div>
               <div>
@@ -287,7 +287,7 @@ export default function KavachamPage() {
             <SectionPanel title="Viniyogaḥ — Dedication" label="विनियोगः" defaultOpen>
               <div className="space-y-3">
                 <p className="font-devanagari text-lg text-emerald-200/75 leading-loose whitespace-pre-line"
-                  style={{ fontFamily: "Noto Serif Devanagari, serif" }}>
+                  style={{ fontFamily: "var(--font-devanagari)" }}>
                   {kavacham.viniyogaMantra.devanagari}
                 </p>
                 <p className="font-mono text-xs text-violet-300/50 italic">{kavacham.viniyogaMantra.iast}</p>
@@ -354,7 +354,7 @@ export default function KavachamPage() {
             <div className="glass-gold rounded-sm p-6 md:p-8 text-center space-y-4">
               <div className="text-label text-gold/50">Closing Colophon</div>
               <p className="font-devanagari text-xl text-gold/80 leading-loose"
-                style={{ fontFamily: "Noto Serif Devanagari, serif" }}>
+                style={{ fontFamily: "var(--font-devanagari)" }}>
                 {kavacham.closingVerse.devanagari}
               </p>
               <p className="font-mono text-xs text-violet-300/50 italic">{kavacham.closingVerse.iast}</p>
@@ -407,7 +407,7 @@ export default function KavachamPage() {
               <SacredGeometry size={120} variant="yantra" color="#b8962e" />
             </div>
             <p className="font-display text-lg text-ivory/35 italic max-w-xl mx-auto">
-              "May the Divine Mother Śrī Mātaṅgī bestow complete success, all siddhi-s, wealth, auspiciousness, and prosperity to us all."
+              &ldquo;May the Divine Mother Śrī Mātaṅgī bestow complete success, all siddhi-s, wealth, auspiciousness, and prosperity to us all.&rdquo;
             </p>
             <p className="text-label text-ivory/20 mt-3">Phalaśruti — Verse 25</p>
           </ScrollReveal>

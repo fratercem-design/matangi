@@ -54,7 +54,7 @@ export default function MantraPlayer({ mantra }: Props) {
       <div className="text-center">
         <div className="text-label text-gold/40 mb-3">{mantra.type}</div>
         <p className="font-devanagari text-2xl md:text-3xl text-emerald-200/80 leading-loose whitespace-pre-line"
-          style={{ fontFamily: "Noto Serif Devanagari, serif" }}>
+          style={{ fontFamily: "var(--font-devanagari)" }}>
           {mantra.sanskrit}
         </p>
         <p className="font-mono text-xs text-violet-300/50 mt-2 italic">{mantra.transliteration}</p>

@@ -8,7 +8,6 @@ import { BookOpen, ChevronDown, ChevronUp, Bookmark, Search } from "lucide-react
 
 function HymnCard({ hymn, index }: { hymn: typeof hymns[0]; index: number }) {
   const [expanded, setExpanded] = useState(false);
-  const [activeVerse, setActiveVerse] = useState(0);
   const [bookmarked, setBookmarked] = useState(false);
   const [view, setView] = useState<"all" | number>("all");
 
@@ -78,7 +77,7 @@ function HymnCard({ hymn, index }: { hymn: typeof hymns[0]; index: number }) {
                         <div className="space-y-2">
                           <div className="text-label text-emerald-500/50 mb-3">Sanskrit</div>
                           <p className="font-devanagari text-2xl text-emerald-300/80 leading-loose whitespace-pre-line"
-                            style={{ fontFamily: "Noto Serif Devanagari, serif" }}>
+                            style={{ fontFamily: "var(--font-devanagari)" }}>
                             {verse.sanskrit}
                           </p>
                         </div>

@@ -68,6 +68,10 @@ export default function ParticleCanvas({ density = 1, className = "" }: Props) {
 
     let rafId: number;
     let frame = 0;
+    // Canvas can't read CSS vars in ctx.font — resolve the next/font family once
+    const devFont =
+      getComputedStyle(document.documentElement).getPropertyValue("--font-devanagari").trim() ||
+      "'Noto Serif Devanagari', serif";
 
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -107,7 +111,7 @@ export default function ParticleCanvas({ density = 1, className = "" }: Props) {
           ctx.shadowColor = p.color + "0.6)";
           ctx.fill();
         } else if (p.type === "glyph") {
-          ctx.font = `${p.size}px 'Noto Serif Devanagari', serif`;
+          ctx.font = `${p.size}px ${devFont}`;
           ctx.fillStyle = p.color + "0.7)";
           ctx.shadowBlur = 6;
           ctx.shadowColor = p.color + "0.4)";

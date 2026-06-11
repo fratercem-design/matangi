@@ -38,7 +38,7 @@ function FiveVersionsSection() {
                       <div>
                         <div className="text-label text-ivory/30 mb-2">{v.label}</div>
                         <p className="font-devanagari text-lg text-emerald-200/75 leading-loose"
-                          style={{ fontFamily: "Noto Serif Devanagari, serif" }}>{v.devanagari}</p>
+                          style={{ fontFamily: "var(--font-devanagari)" }}>{v.devanagari}</p>
                         <p className="font-mono text-xs text-violet-300/45 italic mt-1">{v.iast}</p>
                       </div>
                     </div>
@@ -80,7 +80,7 @@ function MantraJapaSection() {
                   <div className="grid md:grid-cols-2 gap-5">
                     <div>
                       <p className="font-devanagari text-lg text-emerald-200/75 leading-loose whitespace-pre-line"
-                        style={{ fontFamily: "Noto Serif Devanagari, serif" }}>
+                        style={{ fontFamily: "var(--font-devanagari)" }}>
                         {ritual.dhyanam.devanagariText}
                       </p>
                       <p className="font-mono text-xs text-violet-300/40 italic mt-2 whitespace-pre-line">{ritual.dhyanam.iast}</p>
@@ -102,7 +102,7 @@ function MantraJapaSection() {
                       <div key={o.bija} className="flex gap-3 p-3 border border-white/[0.06] bg-black/20 rounded-sm">
                         <div className="text-center shrink-0 w-10">
                           <div className="font-devanagari text-xl text-gold/70"
-                            style={{ fontFamily: "Noto Serif Devanagari, serif" }}>{o.devanagari}</div>
+                            style={{ fontFamily: "var(--font-devanagari)" }}>{o.devanagari}</div>
                           <div className="text-[10px] font-mono text-ivory/25">{o.bija}</div>
                         </div>
                         <div>
@@ -119,7 +119,7 @@ function MantraJapaSection() {
                   <div className="text-label text-gold/40 mb-3">Main Mantra — {ritual.mainMantra.repetitions}× repetitions</div>
                   <div className="glass-emerald rounded-sm p-5 text-center space-y-2">
                     <p className="font-devanagari text-2xl text-emerald-200 leading-loose"
-                      style={{ fontFamily: "Noto Serif Devanagari, serif" }}>{ritual.mainMantra.devanagariText}</p>
+                      style={{ fontFamily: "var(--font-devanagari)" }}>{ritual.mainMantra.devanagariText}</p>
                     <p className="font-mono text-xs text-violet-300/55 italic">{ritual.mainMantra.iast}</p>
                     <p className="font-display text-sm text-ivory/50 italic mt-2">{ritual.mainMantra.meaning}</p>
                   </div>
@@ -130,7 +130,7 @@ function MantraJapaSection() {
                   <div className="text-label text-gold/40 mb-3">Samarpaṇam — Dedication</div>
                   <div className="border-l-2 border-gold/20 pl-4">
                     <p className="font-devanagari text-base text-emerald-200/70 leading-loose whitespace-pre-line"
-                      style={{ fontFamily: "Noto Serif Devanagari, serif" }}>{ritual.samarpana.devanagariText}</p>
+                      style={{ fontFamily: "var(--font-devanagari)" }}>{ritual.samarpana.devanagariText}</p>
                     <p className="font-mono text-xs text-violet-300/40 italic mt-1 whitespace-pre-line">{ritual.samarpana.iast}</p>
                     <p className="font-display text-sm text-ivory/55 italic mt-3 leading-relaxed">{ritual.samarpana.translation}</p>
                   </div>
@@ -173,7 +173,7 @@ function SodasaNamaSection() {
                         <span className="font-display text-sm text-gold/40 w-5 shrink-0">{n.number}</span>
                         <div>
                           <p className="font-devanagari text-base text-emerald-200/75 leading-loose"
-                            style={{ fontFamily: "Noto Serif Devanagari, serif" }}>{n.devanagari}</p>
+                            style={{ fontFamily: "var(--font-devanagari)" }}>{n.devanagari}</p>
                           <p className="font-mono text-[11px] text-violet-300/40 italic mt-0.5">{n.iast}</p>
                           {n.translation && (
                             <p className="font-display text-xs text-ivory/45 italic mt-1 leading-relaxed">{n.translation}</p>
@@ -219,7 +219,7 @@ function SukaShyamalaSection() {
                 <div>
                   <div className="text-label text-gold/40 mb-3">Dhyānam</div>
                   <p className="font-devanagari text-base text-emerald-200/70 leading-loose whitespace-pre-line"
-                    style={{ fontFamily: "Noto Serif Devanagari, serif" }}>{s.dhyanam.devanagari}</p>
+                    style={{ fontFamily: "var(--font-devanagari)" }}>{s.dhyanam.devanagari}</p>
                   <p className="font-display text-sm text-ivory/50 italic mt-3 leading-relaxed">{s.dhyanam.translation}</p>
                 </div>
 
@@ -228,7 +228,7 @@ function SukaShyamalaSection() {
                   <div className="text-label text-gold/40 mb-3">The Mantra — {s.repetitions}× repetitions</div>
                   <div className="glass-emerald rounded-sm p-5 text-center space-y-2">
                     <p className="font-devanagari text-xl text-emerald-200 leading-loose"
-                      style={{ fontFamily: "Noto Serif Devanagari, serif" }}>{s.devanagariText}</p>
+                      style={{ fontFamily: "var(--font-devanagari)" }}>{s.devanagariText}</p>
                     <p className="font-mono text-xs text-violet-300/50 italic">{s.iast}</p>
                   </div>
                 </div>
@@ -240,7 +240,7 @@ function SukaShyamalaSection() {
                     {s.componentMeanings.map(c => (
                       <div key={c.component} className="flex gap-3 p-3 border border-white/[0.05] bg-black/20 rounded-sm text-sm">
                         <div className="font-devanagari text-base text-gold/60 w-40 shrink-0"
-                          style={{ fontFamily: "Noto Serif Devanagari, serif" }}>{c.component}</div>
+                          style={{ fontFamily: "var(--font-devanagari)" }}>{c.component}</div>
                         <div>
                           <span className="text-label text-ivory/30 mr-2">{c.name}</span>
                           <span className="text-ivory/50">{c.meaning}</span>
@@ -292,7 +292,6 @@ function MantraPlayer({ mantra }: { mantra: typeof mantras[0] }) {
   const [active, setActive] = useState(false);
   const [count, setCount] = useState(0);
   const [phaseIdx, setPhaseIdx] = useState(0);
-  const [beatTick, setBeatTick] = useState(0);
   const countRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const breathRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -302,7 +301,7 @@ function MantraPlayer({ mantra }: { mantra: typeof mantras[0] }) {
     setActive(false);
     if (countRef.current) clearInterval(countRef.current);
     if (breathRef.current) clearInterval(breathRef.current);
-    setPhaseIdx(0); setBeatTick(0);
+    setPhaseIdx(0);
   }, []);
 
   const reset = useCallback(() => { stop(); setCount(0); }, [stop]);
@@ -324,7 +323,6 @@ function MantraPlayer({ mantra }: { mantra: typeof mantras[0] }) {
         acc += breathingGuide[i].beats;
         if (pos < acc) { setPhaseIdx(i); break; }
       }
-      setBeatTick(tick);
     }, 500);
   }, [mantra.repetitions, stop, totalBeats]);
 
@@ -339,7 +337,7 @@ function MantraPlayer({ mantra }: { mantra: typeof mantras[0] }) {
       <div className="text-center mb-6">
         <div className="text-label text-gold/40 mb-3">{mantra.type}</div>
         <p className="font-devanagari text-2xl md:text-3xl text-emerald-200/80 leading-loose whitespace-pre-line"
-          style={{ fontFamily: "Noto Serif Devanagari, serif" }}>
+          style={{ fontFamily: "var(--font-devanagari)" }}>
           {mantra.sanskrit}
         </p>
         <p className="font-mono text-xs text-violet-300/50 mt-2 italic">{mantra.transliteration}</p>
@@ -429,7 +427,7 @@ function MantraCard({ mantra, index }: { mantra: typeof mantras[0]; index: numbe
 
           {/* Sanskrit preview */}
           <p className="font-devanagari text-xl text-emerald-300/70 leading-loose mb-3"
-            style={{ fontFamily: "Noto Serif Devanagari, serif" }}>
+            style={{ fontFamily: "var(--font-devanagari)" }}>
             {mantra.sanskrit.split("\n")[0]}
           </p>
           <p className="font-mono text-xs text-violet-300/40 italic mb-4">{mantra.transliteration.split("\n")[0]}</p>
@@ -448,7 +446,7 @@ function MantraCard({ mantra, index }: { mantra: typeof mantras[0]; index: numbe
                     {mantra.wordByWord.map(w => (
                       <div key={w.word} className="flex gap-4 text-sm border-b border-white/[0.04] pb-2">
                         <span className="font-devanagari text-emerald-300/70 w-44 shrink-0"
-                          style={{ fontFamily: "Noto Serif Devanagari, serif" }}>{w.word}</span>
+                          style={{ fontFamily: "var(--font-devanagari)" }}>{w.word}</span>
                         <span className="text-ivory/50">{w.meaning}</span>
                       </div>
                     ))}

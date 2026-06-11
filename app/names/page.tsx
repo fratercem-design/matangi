@@ -39,7 +39,7 @@ function NameCard({ name, highlighted = false }: { name: typeof names108[0]; hig
             )}
             {/* Devanagari */}
             <p className="font-devanagari text-base text-emerald-200/80 leading-loose mt-0.5"
-              style={{ fontFamily: "Noto Serif Devanagari, serif" }}>
+              style={{ fontFamily: "var(--font-devanagari)" }}>
               {name.devanagari}
             </p>
             {/* IAST */}
@@ -92,7 +92,7 @@ function NameRow({ name }: { name: typeof names108[0] }) {
         <span className="font-mono text-xs text-ivory/20 w-7 shrink-0 pt-1">{name.number}</span>
         <div className="flex-1 min-w-0">
           <p className="font-devanagari text-base text-emerald-200/75"
-            style={{ fontFamily: "Noto Serif Devanagari, serif" }}>
+            style={{ fontFamily: "var(--font-devanagari)" }}>
             {name.devanagari}
           </p>
           {open && (
@@ -256,7 +256,7 @@ export default function NamesPage() {
                   <div key={name.number} className="glass-gold rounded-sm p-6 text-center space-y-3">
                     <div className="text-label text-gold/40">NAME {name.number}</div>
                     <p className="font-devanagari text-2xl text-gold/80 leading-loose"
-                      style={{ fontFamily: "Noto Serif Devanagari, serif" }}>
+                      style={{ fontFamily: "var(--font-devanagari)" }}>
                       {name.devanagari}
                     </p>
                     <p className="font-mono text-xs text-violet-300/50 italic">{name.iast}</p>

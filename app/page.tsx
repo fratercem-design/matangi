@@ -17,13 +17,16 @@ function SanskritRain() {
     const chars = "ॐ ह्रीं ऐं क्लीं श्रीं मातङ्गि ✦ ◈ ⬡ ⟁ ◉".split(" ");
     const cols = Math.floor(canvas.width / 32);
     const drops = Array(cols).fill(0).map(() => Math.random() * -80);
+    const devFont =
+      getComputedStyle(document.documentElement).getPropertyValue("--font-devanagari").trim() ||
+      "'Noto Serif Devanagari', serif";
     const tick = () => {
       ctx.fillStyle = "rgba(10,10,15,0.06)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       for (let i = 0; i < drops.length; i++) {
         const alpha = 0.04 + Math.random() * 0.1;
         ctx.fillStyle = `rgba(45,106,79,${alpha})`;
-        ctx.font = `${Math.random() * 9 + 8}px 'Noto Serif Devanagari',serif`;
+        ctx.font = `${Math.random() * 9 + 8}px ${devFont}`;
         ctx.fillText(chars[Math.floor(Math.random() * chars.length)], i * 32, drops[i] * 22);
         if (drops[i] * 22 > canvas.height && Math.random() > 0.975) drops[i] = 0;
         drops[i] += 0.06 + Math.random() * 0.03;
@@ -119,7 +122,7 @@ export default function Home() {
                       animate={{ opacity: [0.4, 0.9, 0.4] }}
                       transition={{ duration: 3, repeat: Infinity }}
                       className="font-devanagari text-3xl text-gold/70"
-                      style={{ fontFamily: "Noto Serif Devanagari, serif" }}
+                      style={{ fontFamily: "var(--font-devanagari)" }}
                     >ॐ</motion.span>
                   </div>
                 </motion.div>
@@ -281,7 +284,7 @@ export default function Home() {
         <div className="section-container relative z-10 max-w-3xl text-center">
           <motion.div initial={{ opacity: 0, scale: 0.97 }} whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }} transition={{ duration: 1 }}>
-            <div className="text-4xl text-gold/25 font-display mb-6">"</div>
+            <div className="text-4xl text-gold/25 font-display mb-6">&ldquo;</div>
             <p className="font-display text-2xl md:text-3xl text-ivory/75 italic leading-relaxed mb-6 font-light">
               She accepts what all others reject.
               She lives where the map ends.
