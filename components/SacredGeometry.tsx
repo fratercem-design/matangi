@@ -1,4 +1,5 @@
 "use client";
+import { useId } from "react";
 import { motion } from "framer-motion";
 
 interface Props {
@@ -18,11 +19,14 @@ export default function SacredGeometry({
 }: Props) {
   const c = color;
   const half = size / 2;
+  // useId: unique gradient id per instance — same-size instances on one page
+  // previously collided on `rg-${size}` and could render the wrong gradient
+  const uid = useId();
 
   if (variant === "lotus") {
     const petals = 8;
     return (
-      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className={className}>
+      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className={className} aria-hidden="true">
         {Array.from({ length: petals }).map((_, i) => {
           const angle = (i * 360) / petals;
           const rad = (angle * Math.PI) / 180;
@@ -47,7 +51,7 @@ export default function SacredGeometry({
 
   if (variant === "minimal") {
     return (
-      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className={className}>
+      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className={className} aria-hidden="true">
         <motion.circle cx={half} cy={half} r={half * 0.92} fill="none" stroke={c} strokeWidth="0.5" opacity="0.2"
           animate={animated ? { rotate: 360 } : undefined}
           transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
@@ -73,14 +77,14 @@ export default function SacredGeometry({
 
   // Default yantra
   return (
-    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className={className}>
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className={className} aria-hidden="true">
       <defs>
-        <radialGradient id={`rg-${size}`} cx="50%" cy="50%" r="50%">
+        <radialGradient id={`rg-${uid}`} cx="50%" cy="50%" r="50%">
           <stop offset="0%" stopColor={c} stopOpacity="0.15" />
           <stop offset="100%" stopColor={c} stopOpacity="0" />
         </radialGradient>
       </defs>
-      <circle cx={half} cy={half} r={half * 0.95} fill={`url(#rg-${size})`} />
+      <circle cx={half} cy={half} r={half * 0.95} fill={`url(#rg-${uid})`} />
       {[0.92, 0.72, 0.52].map((r, i) => (
         <motion.circle key={i} cx={half} cy={half} r={half * r}
           fill="none" stroke={c} strokeWidth="0.5" opacity={0.15 + i * 0.05}

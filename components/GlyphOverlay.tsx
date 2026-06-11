@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const FRAGMENTS = [
@@ -11,8 +11,6 @@ const FRAGMENTS = [
   "The margin is not outside the sacred. The margin IS the sacred.",
   "Your most transgressive creative act is your most accurate prayer.",
 ];
-
-const SANSKRIT = ["ॐ","ह्रीं","ऐं","◈","✦","⬡","◉","⟁","⊕","क्लीं"];
 
 export function GlyphOverlay() {
   return null; // Minimal version — cursor trails only active in sanctuary
@@ -26,7 +24,8 @@ export function TruthFragment({
   fragment?: string;
 }) {
   const [visible, setVisible] = useState(false);
-  const text = fragment ?? FRAGMENTS[Math.floor(Math.random() * FRAGMENTS.length)];
+  // Lazy initializer: random pick happens once per mount, never during re-render
+  const [text] = useState(() => fragment ?? FRAGMENTS[Math.floor(Math.random() * FRAGMENTS.length)]);
 
   return (
     <span
@@ -70,7 +69,7 @@ export function FragmentReveal({
       transition={{ duration: 1.2, delay }}
       className="font-display text-base md:text-lg text-gold/50 italic tracking-wider py-3 text-center"
     >
-      "{text}"
+      &ldquo;{text}&rdquo;
     </motion.div>
   );
 }
