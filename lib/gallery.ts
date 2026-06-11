@@ -22,6 +22,7 @@ export interface GalleryItem {
 export const galleryItems: GalleryItem[] = [
   {
     id: "raja-portrait",
+    image: "/images/gallery/raja-matangi.jpg",
     title: "Raja-Matangi",
     subtitle: "The Sovereign on Her Throne",
     category: "Divine Portraits",
@@ -32,6 +33,7 @@ export const galleryItems: GalleryItem[] = [
   },
   {
     id: "chandali-portrait",
+    image: "/images/gallery/chandali.jpg",
     title: "The Chandali at the Crossroads",
     subtitle: "Wisdom from outside the gate",
     category: "Divine Portraits",
@@ -42,6 +44,7 @@ export const galleryItems: GalleryItem[] = [
   },
   {
     id: "emerald-form",
+    image: "/images/gallery/emerald-form.jpg",
     title: "The Emerald Form",
     subtitle: "Shyama — the dark luminous one",
     category: "Divine Portraits",
@@ -52,6 +55,7 @@ export const galleryItems: GalleryItem[] = [
   },
   {
     id: "veena-meditation",
+    image: "/images/gallery/veena-meditation.jpg",
     title: "The Musician in Stillness",
     subtitle: "Before the first note",
     category: "Divine Portraits",
@@ -61,6 +65,7 @@ export const galleryItems: GalleryItem[] = [
   },
   {
     id: "matangi-yantra",
+    image: "/images/gallery/matangi-yantra.jpg",
     title: "Matangi Yantra",
     subtitle: "Sacred geometry of speech",
     category: "Sacred Symbols",
@@ -80,6 +85,7 @@ export const galleryItems: GalleryItem[] = [
   },
   {
     id: "parrot-glyph",
+    image: "/images/gallery/parrot.jpg",
     title: "The Parrot of Sacred Echo",
     subtitle: "Repetition as creation",
     category: "Sacred Symbols",
@@ -117,6 +123,7 @@ export const galleryItems: GalleryItem[] = [
   },
   {
     id: "sound-wave-cosmos",
+    image: "/images/gallery/sound-cosmos.jpg",
     title: "Sound as Cosmos",
     subtitle: "Shabda Brahman — the universe as vibration",
     category: "Visionary Art",

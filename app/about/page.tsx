@@ -36,6 +36,7 @@ export default function AboutPage() {
         subtitle="Ninth Mahavidya — goddess of speech, music, wisdom, creativity, and the knowledge that lives outside every sanctioned boundary"
         variant="emerald"
         geometry
+        image="/images/heroes/about.jpg"
       />
 
       {/* ── Intro ─────────────────────────────────────────── */}
