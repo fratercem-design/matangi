@@ -22,7 +22,7 @@ export const sodasaNamas: SodasaNama[] = [
   {
     number: 1,
     iast: "oṃ aiṃ klīṃ sauḥ saṅgīta-yoginyai namaḥ",
-    devanagari: "ॐ ऐं क्लीं सौः सांगितयोगिन्यै नमः",
+    devanagari: "ॐ ऐं क्लीं सौः सङ्गीतयोगिन्यै नमः",
     translation: "Salutations to the Goddess who is united with music — the divine union of consciousness and melody",
   },
   {
@@ -33,20 +33,20 @@ export const sodasaNamas: SodasaNama[] = [
   },
   {
     number: 3,
-    iast: "oṃ aiṃ klīṃ sauḥ śyāmaḷāyai namaḥ",
+    iast: "oṃ aiṃ klīṃ sauḥ śyāmalāyai namaḥ",
     devanagari: "ॐ ऐं क्लीं सौः श्यामलायै नमः",
     translation: "Salutations to Śyāmalā — She who is dark and beautiful, the very form of the emerald wisdom-force",
   },
   {
     number: 4,
     iast: "oṃ aiṃ klīṃ sauḥ mantra-nāyikāyai namaḥ",
-    devanagari: "ॐ ऐं क्लीं सौः मंत्रनायिकायै नमः",
+    devanagari: "ॐ ऐं क्लीं सौः मन्त्रनायिकायै नमः",
     translation: "Salutations to the sovereign leader of all mantras — She who controls all sacred sound",
   },
   {
     number: 5,
     iast: "oṃ aiṃ klīṃ sauḥ mantriṇyai namaḥ",
-    devanagari: "ॐ ऐं क्लीं सौः मन्त्रिण्यैनमः",
+    devanagari: "ॐ ऐं क्लीं सौः मन्त्रिण्यै नमः",
     translation: "Salutations to the great minister and counselor — She who is the chief advisor of Śrī Lalitā",
   },
   {
@@ -93,7 +93,7 @@ export const sodasaNamas: SodasaNama[] = [
   },
   {
     number: 13,
-    iast: "oṃ aiṃ klīṃ sauḥ nīpa priyāyai namaḥ",
+    iast: "oṃ aiṃ klīṃ sauḥ nīpapriyāyai namaḥ",
     devanagari: "ॐ ऐं क्लीं सौः नीपप्रियायै नमः",
     translation: "Salutations to She who loves the Nīpa (kadamba) flower — whose fragrance pervades all sacred space",
   },
@@ -106,7 +106,7 @@ export const sodasaNamas: SodasaNama[] = [
   {
     number: 15,
     iast: "oṃ aiṃ klīṃ sauḥ kadambavana-vāsinyai namaḥ",
-    devanagari: "ॐ ऐं क्लीं सौः कदम्ब वन वासिन्यै नमः",
+    devanagari: "ॐ ऐं क्लीं सौः कदम्बवनवासिन्यै नमः",
     translation: "Salutations to She who dwells in the Kadamba forest — the deity of wild, sacred, liminal groves",
   },
   {
@@ -148,8 +148,8 @@ export const mantraJapaRitual = {
   dhyanam: {
     title: "Dhyānam",
     devanagari: "ध्यानम्",
-    iast: "surārṇavāntarīpastharatnamandiramadhyage |\nmāṇikyābharaṇānvitāṃ simatamukhīṃ nīlotpalābhāmbarām\nramyālaktakalipta pādakamalāṃ netratrayollāsinīm |\nvīṇāvādanatatparāṃ suranatāṃ kīracchdaśyāmalām mātaṅgīṃ\nśaśiśekharāmanubhajettāmbūlapūrṇānanām ||",
-    devanagariText: "सुरार्णवान्तरीपस्थरत्नमन्दिरमध्यगे।\nमाणिक्याभरणान्वितां सिमतमुखीं नीलोत्पलाभाम्बराम्\nरम्यालक्तकलिप्त पादकमलां नेत्रत्रयोल्लासिनीम्।\nवीणावादनतत्परां सुरनतां कीरच्छ्दश्यामलाम् मातङ्गीं\nशशिशेखरामनुभजेत्ताम्बूलपूर्णाननाम्॥",
+    iast: "surārṇavāntarīpastharatnamandiramadhyage |\nmāṇikyābharaṇānvitāṃ smitamukhīṃ nīlotpalābhāmbarām\nramyālaktakalipta pādakamalāṃ netratrayollāsinīm |\nvīṇāvādanatatparāṃ suranatāṃ kīracchadaśyāmalām mātaṅgīṃ\nśaśiśekharāmanubhajettāmbūlapūrṇānanām ||",
+    devanagariText: "सुरार्णवान्तरीपस्थरत्नमन्दिरमध्यगे।\nमाणिक्याभरणान्वितां स्मितमुखीं नीलोत्पलाभाम्बराम्\nरम्यालक्तकलिप्त पादकमलां नेत्रत्रयोल्लासिनीम्।\nवीणावादनतत्परां सुरनतां कीरच्छदश्यामलाम् मातङ्गीं\nशशिशेखरामनुभजेत्ताम्बूलपूर्णाननाम्॥",
     translation: "Devi Mātaṅgī is seated on a throne in a bejeweled temple situated on the central island of the sea of liquor (spiritual liquor). I meditate upon Devi Mātaṅgī who is bedecked with ornaments of Ruby, who is smiling, whose luster is like a blue lotus, who is clad in blue garments, whose lotus feet are coloured with red lac juice, who has three brilliant eyes, who is engrossed in playing the Vīṇā, who is adored by gods, whose complexion is blue like the wings of a parrot, whose head is decked with a crescent moon, and whose mouth is filled with betel.",
     source: "Mantramahodadhiḥ",
   },
@@ -215,9 +215,9 @@ export const mantraJapaRitual = {
 
   samarpana: {
     title: "Samarpaṇam",
-    devanagari: "समर्पनम्",
-    iast: "guhyāti guhya goptrī tvaṃ gṛhāṇāsmat-kṛtaṃ japam |\nsiddhirbhavatu me devi tvatprasādānmayi stirā ||",
-    devanagariText: "गुह्याति गुह्य गोप्त्री त्वं गृहाणास्मत्-कृतं जपम् ।\nसिद्धिर्भवतु मे देवि त्वत्प्रसादान्मयि स्तिरा॥",
+    devanagari: "समर्पणम्",
+    iast: "guhyāti guhya goptrī tvaṃ gṛhāṇāsmat-kṛtaṃ japam |\nsiddhirbhavatu me devi tvatprasādānmayi sthirā ||",
+    devanagariText: "गुह्याति गुह्य गोप्त्री त्वं गृहाणास्मत्कृतं जपम् ।\nसिद्धिर्भवतु मे देवि त्वत्प्रसादान्मयि स्थिरा॥",
     translation: "You sustain the secret of all secrets. Please accept this japa performed by me and bestow Your perpetual Grace on me.",
   },
 };
