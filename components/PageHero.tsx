@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { ReactNode } from "react";
+import Image from "next/image";
 import SacredGeometry from "./SacredGeometry";
 
 interface Props {
@@ -11,6 +12,8 @@ interface Props {
   children?: ReactNode;
   variant?: "emerald" | "gold" | "violet" | "midnight";
   geometry?: boolean;
+  /** Optional background artwork, e.g. "/images/heroes/about.jpg". */
+  image?: string;
 }
 
 const gradients = {
@@ -28,9 +31,16 @@ export default function PageHero({
   children,
   variant = "emerald",
   geometry = true,
+  image,
 }: Props) {
   return (
     <section className="relative pt-32 pb-20 md:pt-40 md:pb-24 overflow-hidden">
+      {image && (
+        <div className="absolute inset-0 pointer-events-none">
+          <Image src={image} alt="" fill priority className="object-cover opacity-30" sizes="100vw" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f]/40 via-[#0a0a0f]/70 to-[#0a0a0f]" />
+        </div>
+      )}
       <div className="absolute inset-0 pointer-events-none" style={{ background: gradients[variant] }} />
       {geometry && (
         <div className="absolute right-8 top-16 md:right-20 opacity-20 pointer-events-none hidden md:block">

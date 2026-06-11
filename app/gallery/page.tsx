@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import PageHero from "@/components/PageHero";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -7,8 +8,25 @@ import SacredGeometry from "@/components/SacredGeometry";
 import { galleryItems, galleryCategories } from "@/lib/gallery";
 import { X, ZoomIn } from "lucide-react";
 
-// ── Generative artwork placeholder ───────────────────────────
+// ── Artwork: real image when provided, else generative SVG ──
 function ArtworkPlaceholder({ item }: { item: typeof galleryItems[0] }) {
+  const [imgFailed, setImgFailed] = useState(false);
+
+  if (item.image && !imgFailed) {
+    return (
+      <div className="w-full h-full relative overflow-hidden bg-[#0a0a0f]">
+        <Image
+          src={item.image}
+          alt={`${item.title} — ${item.subtitle}`}
+          fill
+          sizes="(max-width: 768px) 50vw, 25vw"
+          className="object-cover"
+          onError={() => setImgFailed(true)}
+        />
+      </div>
+    );
+  }
+
   const [c0, c1, c2, c3] = item.palette;
   const variants: Record<string, "yantra" | "lotus" | "sri" | "minimal"> = {
     "Divine Portraits": "lotus",
@@ -107,6 +125,12 @@ function GalleryItem({ item, onClick }: { item: typeof galleryItems[0]; onClick:
 
 // ── Lightbox ─────────────────────────────────────────────────
 function Lightbox({ item, onClose }: { item: typeof galleryItems[0]; onClose: () => void }) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+
   return (
     <motion.div
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}

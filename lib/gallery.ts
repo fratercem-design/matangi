@@ -11,6 +11,12 @@ export interface GalleryItem {
   palette: string[];
   tags: string[];
   featured?: boolean;
+  /**
+   * Optional real artwork. Drop a file in `public/images/gallery/` and set the
+   * path here, e.g. image: "/images/gallery/raja-matangi.jpg".
+   * When omitted, the generative SVG artwork is shown instead.
+   */
+  image?: string;
 }
 
 export const galleryItems: GalleryItem[] = [
