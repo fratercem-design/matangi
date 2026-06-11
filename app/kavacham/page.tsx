@@ -75,8 +75,15 @@ function VerseCard({ verse, index }: { verse: typeof kavacham.verses[0]; index: 
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="px-5 md:px-6 pb-6 border-t border-white/[0.05] pt-5 space-y-5">
-              {/* Three columns */}
+              {/* Three columns — English first */}
               <div className="grid md:grid-cols-3 gap-5">
+                {/* Translation */}
+                <div>
+                  <div className="text-label text-gold/50 mb-2">Translation</div>
+                  <p className="font-display text-base text-ivory/65 leading-relaxed italic">
+                    {verse.translation}
+                  </p>
+                </div>
                 {/* Sanskrit */}
                 <div>
                   <div className="text-label text-emerald-500/50 mb-2">Devanāgarī</div>
@@ -90,13 +97,6 @@ function VerseCard({ verse, index }: { verse: typeof kavacham.verses[0]; index: 
                   <div className="text-label text-violet-400/50 mb-2">IAST Transliteration</div>
                   <p className="font-mono text-sm text-violet-300/65 leading-relaxed whitespace-pre-line italic">
                     {verse.iast}
-                  </p>
-                </div>
-                {/* Translation */}
-                <div>
-                  <div className="text-label text-gold/50 mb-2">Translation</div>
-                  <p className="font-display text-base text-ivory/65 leading-relaxed italic">
-                    {verse.translation}
                   </p>
                 </div>
               </div>
@@ -130,12 +130,12 @@ function NyasaDisplay() {
             <span className="font-mono text-xs text-emerald-400/60">{step.number}</span>
           </div>
           <div className="flex-1 space-y-1">
+            <p className="text-ivory/50 text-sm mb-1">{step.procedure}</p>
             <p className="font-devanagari text-base text-emerald-200/75"
               style={{ fontFamily: "var(--font-devanagari)" }}>
               {step.devanagari}
             </p>
             <p className="font-mono text-xs text-violet-300/40 italic">{step.iast}</p>
-            <p className="text-ivory/50 text-sm mt-1">{step.procedure}</p>
           </div>
         </div>
       ))}
@@ -286,16 +286,16 @@ export default function KavachamPage() {
           <ScrollReveal className="mb-10">
             <SectionPanel title="Viniyogaḥ — Dedication" label="विनियोगः" defaultOpen>
               <div className="space-y-3">
+                <div className="border-l-2 border-gold/20 pl-4 mb-3">
+                  <p className="font-display text-sm text-ivory/60 italic leading-relaxed">
+                    {kavacham.viniyogaMantra.translation}
+                  </p>
+                </div>
                 <p className="font-devanagari text-lg text-emerald-200/75 leading-loose whitespace-pre-line"
                   style={{ fontFamily: "var(--font-devanagari)" }}>
                   {kavacham.viniyogaMantra.devanagari}
                 </p>
                 <p className="font-mono text-xs text-violet-300/50 italic">{kavacham.viniyogaMantra.iast}</p>
-                <div className="border-l-2 border-gold/20 pl-4 mt-3">
-                  <p className="font-display text-sm text-ivory/60 italic leading-relaxed">
-                    {kavacham.viniyogaMantra.translation}
-                  </p>
-                </div>
               </div>
             </SectionPanel>
           </ScrollReveal>
@@ -353,14 +353,14 @@ export default function KavachamPage() {
           <ScrollReveal className="mb-14">
             <div className="glass-gold rounded-sm p-6 md:p-8 text-center space-y-4">
               <div className="text-label text-gold/50">Closing Colophon</div>
+              <p className="font-display text-base text-ivory/55 italic max-w-2xl mx-auto leading-relaxed">
+                {kavacham.closingVerse.translation}
+              </p>
               <p className="font-devanagari text-xl text-gold/80 leading-loose"
                 style={{ fontFamily: "var(--font-devanagari)" }}>
                 {kavacham.closingVerse.devanagari}
               </p>
               <p className="font-mono text-xs text-violet-300/50 italic">{kavacham.closingVerse.iast}</p>
-              <p className="font-display text-base text-ivory/55 italic max-w-2xl mx-auto leading-relaxed">
-                {kavacham.closingVerse.translation}
-              </p>
             </div>
           </ScrollReveal>
 

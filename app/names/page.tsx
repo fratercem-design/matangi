@@ -37,6 +37,8 @@ function NameCard({ name, highlighted = false }: { name: typeof names108[0]; hig
                 {name.category}
               </span>
             )}
+            {/* Meaning (English) above the Sanskrit */}
+            <p className="text-ivory/45 text-xs leading-relaxed mt-1 line-clamp-1">{name.meaning}</p>
             {/* Devanagari */}
             <p className="font-devanagari text-base text-emerald-200/80 leading-loose mt-0.5"
               style={{ fontFamily: "var(--font-devanagari)" }}>
@@ -49,12 +51,6 @@ function NameCard({ name, highlighted = false }: { name: typeof names108[0]; hig
           <span className="text-ivory/20 mt-2 shrink-0 text-xs">{expanded ? "−" : "+"}</span>
         </div>
 
-        {/* Meaning preview */}
-        {!expanded && (
-          <p className="text-ivory/40 text-xs leading-relaxed mt-2 ml-12 line-clamp-1">
-            {name.meaning}
-          </p>
-        )}
       </button>
 
       <AnimatePresence>
@@ -91,14 +87,18 @@ function NameRow({ name }: { name: typeof names108[0] }) {
       <button onClick={() => setOpen(!open)} className="w-full text-left py-3 px-2 flex gap-3 items-start hover:bg-white/[0.02] transition-colors rounded-sm">
         <span className="font-mono text-xs text-ivory/20 w-7 shrink-0 pt-1">{name.number}</span>
         <div className="flex-1 min-w-0">
+          {open && (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mb-2">
+              <p className="font-display text-sm text-ivory/55 italic leading-relaxed">{name.meaning}</p>
+            </motion.div>
+          )}
           <p className="font-devanagari text-base text-emerald-200/75"
             style={{ fontFamily: "var(--font-devanagari)" }}>
             {name.devanagari}
           </p>
           {open && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-2 space-y-1">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-2">
               <p className="font-mono text-xs text-violet-300/50 italic">{name.iast}</p>
-              <p className="font-display text-sm text-ivory/55 italic leading-relaxed">{name.meaning}</p>
             </motion.div>
           )}
         </div>
@@ -255,12 +255,12 @@ export default function NamesPage() {
                 {[names108[0], names108[107]].map(name => (
                   <div key={name.number} className="glass-gold rounded-sm p-6 text-center space-y-3">
                     <div className="text-label text-gold/40">NAME {name.number}</div>
+                    <p className="font-display text-sm text-ivory/55 italic leading-relaxed">{name.meaning}</p>
                     <p className="font-devanagari text-2xl text-gold/80 leading-loose"
                       style={{ fontFamily: "var(--font-devanagari)" }}>
                       {name.devanagari}
                     </p>
                     <p className="font-mono text-xs text-violet-300/50 italic">{name.iast}</p>
-                    <p className="font-display text-sm text-ivory/55 italic leading-relaxed">{name.meaning}</p>
                   </div>
                 ))}
               </div>

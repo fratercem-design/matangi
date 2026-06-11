@@ -71,8 +71,16 @@ function HymnCard({ hymn, index }: { hymn: typeof hymns[0]; index: number }) {
                     <div key={verse.number} className="space-y-6">
                       <div className="text-label text-ivory/20">VERSE {verse.number}</div>
 
-                      {/* Three-column layout */}
+                      {/* Three-column layout — English first */}
                       <div className="grid md:grid-cols-3 gap-6">
+                        {/* Translation */}
+                        <div className="space-y-2">
+                          <div className="text-label text-gold/50 mb-3">Translation</div>
+                          <p className="font-display text-base text-ivory/65 leading-relaxed italic">
+                            {verse.translation}
+                          </p>
+                        </div>
+
                         {/* Sanskrit */}
                         <div className="space-y-2">
                           <div className="text-label text-emerald-500/50 mb-3">Sanskrit</div>
@@ -87,14 +95,6 @@ function HymnCard({ hymn, index }: { hymn: typeof hymns[0]; index: number }) {
                           <div className="text-label text-violet-400/50 mb-3">Transliteration</div>
                           <p className="font-mono text-sm text-violet-300/70 leading-relaxed whitespace-pre-line italic">
                             {verse.transliteration}
-                          </p>
-                        </div>
-
-                        {/* Translation */}
-                        <div className="space-y-2">
-                          <div className="text-label text-gold/50 mb-3">Translation</div>
-                          <p className="font-display text-base text-ivory/65 leading-relaxed italic">
-                            {verse.translation}
                           </p>
                         </div>
                       </div>
