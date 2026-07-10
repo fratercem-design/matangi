@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Cormorant_Garamond, Inter, IBM_Plex_Mono, Noto_Serif_Devanagari } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
@@ -74,6 +75,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
           <AmbientSound />
         </MotionProvider>
+        <Analytics />
       </body>
     </html>
   );
