@@ -11,7 +11,19 @@ import {
 } from "@/lib/dasa-mahavidya";
 import Link from "next/link";
 
-export const metadata: Metadata = { title: "About" };
+export const metadata: Metadata = {
+  title: "About",
+  description:
+    "Who Mātaṅgī is, and where she stands among the ten Mahāvidyās — the ninth wisdom goddess, of speech and the forbidden.",
+  alternates: { canonical: "/about" },
+  openGraph: {
+    title: "About · Temple of Ma Matangi",
+    description:
+      "Who Mātaṅgī is, and where she stands among the ten Mahāvidyās — the ninth wisdom goddess, of speech and the forbidden.",
+    url: "/about",
+    type: "website",
+  },
+};
 
 const MAHAVIDYAS: { n: string; name: string; domain: string; active?: boolean }[] = [
   { n: "I",    name: "Kali",              domain: "Time · Liberation" },
