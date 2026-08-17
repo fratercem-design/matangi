@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
-
-const SITE_URL = "https://matangi-production.up.railway.app";
+import { SITE_URL } from "@/lib/site";
 
 const routes = [
   "",
