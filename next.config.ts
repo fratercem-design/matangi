@@ -18,8 +18,7 @@ const CSP = [
 ].join("; ");
 
 const nextConfig: NextConfig = {
-  // Removed "output: export" — Railway runs Next.js as a Node server
-  // For GitHub Pages static export, re-add: output: "export"
+  // Keep the Node server runtime enabled for the dynamic health endpoint.
   images: { unoptimized: true },
   // Don't advertise the framework in every response.
   poweredByHeader: false,
